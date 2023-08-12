@@ -1,12 +1,13 @@
 [tool.poetry]
 name = "forecastos"
 version = "0.1.0"
-description = ""
-authors = ["Your Name <you@example.com>"]
+description = "Observability for ML workflows. By forecastos.com"
+authors = ["Charlie Reese <charlie.reese@hey.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.9"
+requests = "^2.31.0"
 
 
 [build-system]

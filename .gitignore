@@ -1,0 +1,5 @@
+**/__pycache__
+.personal_README.md
+.pypi_token
+dist/
+**/tmp
