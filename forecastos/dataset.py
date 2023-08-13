@@ -16,6 +16,8 @@ class Dataset(Saveable):
         self.team_ids = kwargs.get("team_ids", [])
         self.process_tables(kwargs.get("tables", {}))
 
+        self.save()
+
     def process_tables(self, tables):
         self.tables = []
         for name, df in tables.items():
