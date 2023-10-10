@@ -1,4 +1,5 @@
 from forecastos.saveable import Saveable
+from forecastos.chart import Chart
 
 
 class Feature(Saveable):
@@ -40,41 +41,12 @@ class Feature(Saveable):
             },
         )
 
-    def create_ts_percentile_chart(self, val_column, date_column, df):
-        df = (
-            df.groupby(date_column)[val_column]
-            .quantile([0.1, 0.5, 0.9])
-            .unstack()
-            .dropna()
-        )
+    def create_ts_percentile_chart(self, *args, **kwargs):
+        return Chart(
+            chartable_type="Feature", chartable_id=self.id
+        ).create_ts_percentile_chart(*args, **kwargs)
 
-        return self.save_record(
-            path="/charts",
-            body={
-                "chart": {
-                    "title": "Percentile evolution",
-                    "chartable_type": "Feature",
-                    "chartable_id": self.id,
-                    "chart_traces": [
-                        {
-                            "x_name": "Dates",
-                            "y_name": "90th Percentile",
-                            "x_values": [str(d) for d in df.index.tolist()],
-                            "y_values": df[0.9].to_list(),
-                        },
-                        {
-                            "x_name": "Dates",
-                            "y_name": "50th Percentile",
-                            "x_values": [str(d) for d in df.index.tolist()],
-                            "y_values": df[0.5].to_list(),
-                        },
-                        {
-                            "x_name": "Dates",
-                            "y_name": "10th Percentile",
-                            "x_values": [str(d) for d in df.index.tolist()],
-                            "y_values": df[0.1].to_list(),
-                        },
-                    ],
-                }
-            },
-        )
+    def create_ts_count_chart(self, *args, **kwargs):
+        return Chart(
+            chartable_type="Feature", chartable_id=self.id
+        ).create_ts_count_chart(*args, **kwargs)

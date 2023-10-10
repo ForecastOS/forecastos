@@ -5,3 +5,5 @@ api_endpoint = "https://app.forecastos.com/api/v1"
 
 from forecastos.dataset import *
 from forecastos.feature import *
+from forecastos.chart import *
+from forecastos.forecast import *
