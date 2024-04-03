@@ -27,31 +27,47 @@ class Feature(Saveable):
         self.id_columns = kwargs.get("id_columns", [])
         self.provider_ids = kwargs.get("provider_ids", [])
 
-        self.save()
+    @classmethod
+    def find(cls, query=""):
+        return cls.get(
+            path="/fh_features",
+            params={"q": query},
+            fh=True,
+        )
 
     def create(self):
-        print("TBU")
         return self.save_record(
             path="/fh_features",
-            body={
-                "fh_feature": {
-                    "name": self.name,
-                    "description": self.description,
-                    "calc_methodology": self.calc_methodology,
-                    "category": self.category,
-                    "subcategory": self.subcategory,
-                    "suggested_delay_s": self.suggested_delay_s,
-                    "suggested_delay_description": self.suggested_delay_description,
-                    "universe": self.universe,
-                    "time_delta": self.time_delta,
-                    "file_location": self.file_location,
-                    "schema": self.schema,
-                    "datetime_column": self.tbu,
-                    "value_type": self.value_type,
-                    "timeseries": self.timeseries,
-                    "fill_method": self.fill_method,
-                    "id_columns": self.id_columns,
-                    "provider_ids": self.provider_ids,
-                }
-            },
+            body=self.fh_feature_params(),
+            fh=True,
         )
+
+    def create_or_update(self):
+        return self.save_record(
+            path="/fh_features/create_or_update",
+            body=self.fh_feature_params(),
+            fh=True,
+        )
+
+    def fh_feature_params(self):
+        return {
+            "fh_feature": {
+                "name": self.name,
+                "description": self.description,
+                "calc_methodology": self.calc_methodology,
+                "category": self.category,
+                "subcategory": self.subcategory,
+                "suggested_delay_s": self.suggested_delay_s,
+                "suggested_delay_description": self.suggested_delay_description,
+                "universe": self.universe,
+                "time_delta": self.time_delta,
+                "file_location": self.file_location,
+                "schema": self.schema,
+                "datetime_column": self.datetime_column,
+                "value_type": self.value_type,
+                "timeseries": self.timeseries,
+                "fill_method": self.fill_method,
+                "id_columns": self.id_columns,
+                "provider_ids": self.provider_ids,
+            }
+        }
