@@ -24,9 +24,7 @@ class Saveable:
             json=body,
         )
 
-        if (
-            response.status_code // 100 == 2
-        ):  # Check if the status code is in the 200 range
+        if response.ok:  # Check if the status code is in the 200 range
             self.id = response.json().get("id")
             print(f"{self.__class__.__name__} {self.id} saved")
         else:
@@ -34,10 +32,10 @@ class Saveable:
                 f"{self.__class__.__name__} save failed with status code: {response.status_code}"
             )
 
-        return response.json()
+        return response
 
     @classmethod
-    def get(self, path="/", params={}, fh=False):
+    def get_request(self, path="/", params={}, fh=False):
         if fh:
             request_headers = {
                 "Authorization": f"Bearer {forecastos.fh_api_key}",
@@ -53,11 +51,23 @@ class Saveable:
             params=params,
         )
 
-        if (
-            response.status_code // 100 != 2
-        ):  # Check if the status code is in the 200 range
+        if not response.ok:  # Check if the status code is in the 200 range
             print(
                 f"{self.__class__.__name__} save failed with status code: {response.status_code}"
             )
 
-        return response.json()
+        return response
+
+    @classmethod
+    def init_sync_return(cls, obj):
+        instance = cls()
+        for key, value in obj.items():
+            setattr(instance, key, value)
+
+        return instance
+
+    def sync_return(self, obj):
+        for key, value in obj.items():
+            setattr(self, key, value)
+
+        return self
