@@ -1,6 +1,10 @@
 from forecastos.saveable import Saveable
 import pandas as pd
 from pandas.api.types import is_object_dtype
+import io
+import boto3
+from botocore.exceptions import NoCredentialsError
+import os
 
 
 class Feature(Saveable):
@@ -63,6 +67,18 @@ class Feature(Saveable):
     def find(cls, query=""):
         return cls.list(params={"q": query})
 
+    def get_df(self):
+        res = self.__class__.get_request(
+            path=f"/fh_features/{self.uuid}/url",
+            fh=True,
+        )
+
+        if res.ok:
+            return pd.read_parquet(res.json()["url"])
+        else:
+            print(res)
+            return False
+
     def upload_df(self, df):
         val_col = "val"
 
@@ -97,18 +113,21 @@ class Feature(Saveable):
 
         # Add schema info
         self.schema = df.dtypes.to_dict()
-
         if is_object_dtype(df[val_col]):
             print(
                 "Choose more specific data type for val column, like int, float, str/text, bool, or datetime."
             )
             return False
+        else:
+            self.schema = {key: str(value) for key, value in self.schema.items()}
 
-        # [ ] Set file_location (based on uuid, env)
-        # And bucket
-        # [ ] create_or_update
-        # [ ] Can write file as uuid_new.parquet, then mv to uuid.parquet, then remove uuid_new.parquet
-        # [ ] Create_or_update
+        # Upload file, then update record in FeatureHub
+        if self.upload_df_to_s3(df):
+            print("File processed successfully.")
+            return self.create_or_update()
+        else:
+            print("File processing failed.")
+            return False
 
     def create(self):
         res = self.save_record(
@@ -165,3 +184,55 @@ class Feature(Saveable):
                 "provider_ids": self.provider_ids,
             }
         }
+
+    def upload_df_to_s3(self, df):
+        """
+        Upload a file to an S3 bucket to a temporary location, then move it to the final location, and finally remove the temporary file.
+        :return: True if process is successful, else False
+        """
+        path_env = os.environ.get("SKYLIGHT_FH_PATH_ENV") or "dev"
+        temp_object_name = f"FeatureHub/{path_env}/features/{self.uuid}_new.parquet"
+        final_object_name = f"FeatureHub/{path_env}/features/{self.uuid}.parquet"
+        bucket_name = os.environ.get("SKYLIGHT_FH_S3_BUCKET") or os.environ.get(
+            "S3_BUCKET"
+        )
+        region = os.environ.get("SKYLIGHT_FH_S3_REGION") or os.environ.get("S3_REGION")
+        access_key_id = os.environ.get("SKYLIGHT_FH_S3_ACCESS_KEY") or os.environ.get(
+            "S3_ACCESS_KEY"
+        )
+        secret_access_key = os.environ.get(
+            "SKYLIGHT_FH_S3_SECRET_ACCESS_KEY"
+        ) or os.environ.get("S3_SECRET_ACCESS_KEY")
+
+        # Create an S3 client with specified AWS credentials
+        s3_client = boto3.client(
+            "s3",
+            region_name=region,
+            aws_access_key_id=access_key_id,
+            aws_secret_access_key=secret_access_key,
+        )
+        try:
+            # Convert DataFrame to Parquet format in memory
+            buffer = io.BytesIO()
+            df.to_parquet(buffer, index=False)
+            buffer.seek(0)  # Reset buffer position to the beginning after writing
+
+            # Step 1: Upload the file to the temporary location
+            print(temp_object_name)
+            s3_client.upload_fileobj(buffer, bucket_name, temp_object_name)
+
+            # Step 2: Copy the file from the temporary location to the final location
+            copy_source = {"Bucket": bucket_name, "Key": temp_object_name}
+            s3_client.copy(copy_source, bucket_name, final_object_name)
+
+            # Step 3: Delete the temporary file
+            s3_client.delete_object(Bucket=bucket_name, Key=temp_object_name)
+        except NoCredentialsError as e:
+            print(e)
+            return False
+        except Exception as e:
+            print(f"Error during file operation: {e}")
+            return False
+
+        self.file_location = final_object_name
+        return True
