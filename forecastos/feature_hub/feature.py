@@ -34,6 +34,7 @@ class Feature(Saveable):
 
         self.fill_method = kwargs.get("fill_method", [])
         self.id_columns = kwargs.get("id_columns", [])
+        self.supplementary_columns = kwargs.get("supplementary_columns", [])
         self.provider_ids = kwargs.get("provider_ids", [])
 
     @classmethod
@@ -79,8 +80,47 @@ class Feature(Saveable):
             print(res)
             return False
 
+    def info(self):
+        return self.__dict__
+
+    def create(self):
+        res = self.save_record(
+            path="/fh_features",
+            body=self.fh_feature_params(),
+            fh=True,
+        )
+
+        if res.ok:
+            return self.sync_return(res.json())
+        else:
+            print(res)
+            return False
+
+    def create_or_update(self, df=None):
+        return self.save(df)
+
+    def save(self, df=None):
+        res = self.save_record(
+            path="/fh_features/create_or_update",
+            body=self.fh_feature_params(),
+            fh=True,
+        )
+
+        if res.ok:
+            self.sync_return(res.json())
+            if df is not None:
+                return self.upload_df(df)
+            else:
+                return self
+        else:
+            print(res)
+            return False
+
+    def __str__(self):
+        return f"Feature_{self.uuid}_{self.name}"
+
     def upload_df(self, df):
-        val_col = "val"
+        val_col = "value"
 
         # Set memory_usage
         self.memory_usage = df.memory_usage(deep=True).sum() / (1024**2)
@@ -88,7 +128,12 @@ class Feature(Saveable):
         # Enforce existence of expected columns only
         required_columns = [
             col
-            for col in [*self.id_columns, self.datetime_column, val_col]
+            for col in [
+                *self.id_columns,
+                *self.supplementary_columns,
+                self.datetime_column,
+                val_col,
+            ]
             if col != None
         ]
         invalid_cols = [col for col in df.columns if col not in required_columns]
@@ -113,7 +158,7 @@ class Feature(Saveable):
 
         # Add schema info
         self.schema = df.dtypes.to_dict()
-        if is_object_dtype(df[val_col]):
+        if is_object_dtype(df[val_col]) and self.value_type != "text":
             print(
                 "Choose more specific data type for val column, like int, float, str/text, bool, or datetime."
             )
@@ -124,42 +169,10 @@ class Feature(Saveable):
         # Upload file, then update record in FeatureHub
         if self.upload_df_to_s3(df):
             print("File processed successfully.")
-            return self.create_or_update()
+            return self.save()
         else:
             print("File processing failed.")
             return False
-
-    def create(self):
-        res = self.save_record(
-            path="/fh_features",
-            body=self.fh_feature_params(),
-            fh=True,
-        )
-
-        if res.ok:
-            return self.sync_return(res.json())
-        else:
-            print(res)
-            return False
-
-    def create_or_update(self):
-        res = self.save_record(
-            path="/fh_features/create_or_update",
-            body=self.fh_feature_params(),
-            fh=True,
-        )
-
-        if res.ok:
-            return self.sync_return(res.json())
-        else:
-            print(res)
-            return False
-
-    def __str__(self):
-        return f"Feature_{self.uuid}_{self.name}"
-
-    def info(self):
-        return self.__dict__
 
     def fh_feature_params(self):
         return {
@@ -181,6 +194,7 @@ class Feature(Saveable):
                 "memory_usage": self.memory_usage,
                 "fill_method": self.fill_method,
                 "id_columns": self.id_columns,
+                "supplementary_columns": self.supplementary_columns,
                 "provider_ids": self.provider_ids,
             }
         }
@@ -190,9 +204,8 @@ class Feature(Saveable):
         Upload a file to an S3 bucket to a temporary location, then move it to the final location, and finally remove the temporary file.
         :return: True if process is successful, else False
         """
-        path_env = os.environ.get("SKYLIGHT_FH_PATH_ENV") or "dev"
-        temp_object_name = f"FeatureHub/{path_env}/features/{self.uuid}_new.parquet"
-        final_object_name = f"FeatureHub/{path_env}/features/{self.uuid}.parquet"
+        temp_object_name = f"FeatureHub/features/{self.uuid}_new.parquet"
+        final_object_name = f"FeatureHub/features/{self.uuid}.parquet"
         bucket_name = os.environ.get("SKYLIGHT_FH_S3_BUCKET") or os.environ.get(
             "S3_BUCKET"
         )
@@ -218,7 +231,6 @@ class Feature(Saveable):
             buffer.seek(0)  # Reset buffer position to the beginning after writing
 
             # Step 1: Upload the file to the temporary location
-            print(temp_object_name)
             s3_client.upload_fileobj(buffer, bucket_name, temp_object_name)
 
             # Step 2: Copy the file from the temporary location to the final location
