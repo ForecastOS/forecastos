@@ -1,52 +1,78 @@
-from forecastos.saveable import Saveable
-from forecastos.chart import Chart
+from forecastos.utils.readable import Readable
+import pandas as pd
+import os
 
 
-class Feature(Saveable):
-    def __init__(self, name, description, dataset_ids=[], *args, **kwargs):
+class Feature(Readable):
+    def __init__(self, name="", description="", *args, **kwargs):
         self.name = name
         self.description = description
-        self.dataset_ids = dataset_ids
+        self.uuid = None
 
-        self.group = kwargs.get("group")
-        self.subgroup = kwargs.get("subgroup")
+        self.calc_methodology = kwargs.get("calc_methodology")
+        self.category = kwargs.get("category")
+        self.subcategory = kwargs.get("subcategory")
+
+        self.suggested_delay_s = kwargs.get("suggested_delay_s", 0)
+        self.suggested_delay_description = kwargs.get("suggested_delay_description")
+
         self.universe = kwargs.get("universe")
-        self.data_type = kwargs.get("data_type")
-        self.data_location = kwargs.get("data_location")
-        self.time_series = kwargs.get("time_series")
 
-        self.tags = kwargs.get("tags", [])
-        self.team_ids = kwargs.get("team_ids", [])
-        self.charts = kwargs.get("charts", [])
+        self.time_delta = kwargs.get("time_delta")
 
-        self.save()
+        self.file_location = kwargs.get("file_location")
+        self.schema = kwargs.get("schema")
+        self.datetime_column = kwargs.get("datetime_column")
+        self.value_type = kwargs.get("value_type")
+        self.timeseries = kwargs.get("timeseries")
 
-    def save(self):
-        return self.save_record(
-            path="/features/create_or_update",
-            body={
-                "feature": {
-                    "name": self.name,
-                    "description": self.description,
-                    "dataset_ids": self.dataset_ids,
-                    "group": self.group,
-                    "subgroup": self.subgroup,
-                    "universe": self.universe,
-                    "data_type": self.data_type,
-                    "data_location": self.data_location,
-                    "time_series": self.time_series,
-                    "tags": self.tags,
-                    "team_ids": self.team_ids,
-                }
-            },
+        self.memory_usage = kwargs.get("memory_usage")
+
+        self.fill_method = kwargs.get("fill_method", [])
+        self.id_columns = kwargs.get("id_columns", [])
+        self.supplementary_columns = kwargs.get("supplementary_columns", [])
+        self.provider_ids = kwargs.get("provider_ids", [])
+
+    @classmethod
+    def get(cls, uuid):
+        res = cls.get_request(path=f"/fh_features/{uuid}")
+
+        if res.ok:
+            return cls.sync_read(res.json())
+        else:
+            print(res)
+            return False
+
+    def get_df(self):
+        res = self.__class__.get_request(
+            path=f"/fh_features/{self.uuid}/url",
         )
 
-    def create_ts_percentile_chart(self, *args, **kwargs):
-        return Chart(
-            chartable_type="Feature", chartable_id=self.id
-        ).create_ts_percentile_chart(*args, **kwargs)
+        if res.ok:
+            return pd.read_parquet(res.json()["url"])
+        else:
+            print(res)
+            return False
 
-    def create_ts_count_chart(self, *args, **kwargs):
-        return Chart(
-            chartable_type="Feature", chartable_id=self.id
-        ).create_ts_count_chart(*args, **kwargs)
+    @classmethod
+    def list(cls, params={}):
+        res = cls.get_request(
+            path=f"/fh_features",
+            params=params,
+        )
+
+        if res.ok:
+            return [cls.sync_read(obj) for obj in res.json()]
+        else:
+            print(res)
+            return False
+
+    @classmethod
+    def find(cls, query=""):
+        return cls.list(params={"q": query})
+
+    def info(self):
+        return self.__dict__
+
+    def __str__(self):
+        return f"Feature_{self.uuid}_{self.name}"

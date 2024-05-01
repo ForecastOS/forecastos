@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "forecastos"
 version = "0.1.0"
-description = "Observability for ML workflows. By forecastos.com"
+description = "Pre-engineered feature data and tools for ML workflows. By quantitative investors at forecastos.com"
 authors = ["Charlie Reese <charlie.reese@hey.com>"]
 readme = "README.md"
 
@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.9"
 requests = "^2.31.0"
 boto3 = "^1.34.78"
+pandas = "^2.2.2"
 
 
 [build-system]
