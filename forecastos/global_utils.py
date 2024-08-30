@@ -62,6 +62,7 @@ def transform_into_quantiles(df):
 
 def get_feature_df(uuid, *args, **kwargs):
     invert_col = kwargs.get("invert_col", False)
+    log10_col = kwargs.get("log10_col", False)
     universe_ids = kwargs.get("universe_ids", False)
     sort_values = kwargs.get("sort_values", False)
     add_recommended_delay = kwargs.get("add_recommended_delay", False)
@@ -111,6 +112,9 @@ def get_feature_df(uuid, *args, **kwargs):
     if invert_col:
         df[invert_col] = 1 / df[invert_col]
         df[invert_col] = df[invert_col].replace([np.inf, -np.inf], np.nan)
+
+    if log10_col:
+        df[log10_col] = np.log10(df[log10_col])
 
     if normalize_group:
         df = fos.normalize_group(df, **normalize_group)
