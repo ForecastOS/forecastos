@@ -73,6 +73,8 @@ def get_feature_df(uuid, *args, **kwargs):
     pivot = kwargs.get("pivot", False)
     convert_to_quantiles = kwargs.get("convert_to_quantiles", False)
     sort_cols = kwargs.get("sort_cols", False)
+    remove_inf_cols = kwargs.get("remove_inf_cols", [])
+    cast_to_float64_cols = kwargs.get("cast_to_float64_cols", [])
     fillna = kwargs.get("fillna", False)
     fillna_value = kwargs.get("fillna_value", 0)
     rename_columns = kwargs.get("rename_columns", False)
@@ -83,11 +85,16 @@ def get_feature_df(uuid, *args, **kwargs):
     if rename_columns:
         df = df.rename(columns=rename_columns)
 
-    if invert_col:
-        df[invert_col] = 1 / df[invert_col]
-
     if universe_ids:
         df = df[df.id.isin(universe_ids)]
+
+    if remove_inf_cols:
+        for col in remove_inf_cols:
+            df[col] = df[col].replace([np.inf, -np.inf], np.nan)
+
+    if cast_to_float64_cols:
+        for col in cast_to_float64_cols:
+            df[col] = df[col].astype("float64")
 
     if sort_values:
         df = df.sort_values(sort_values)
@@ -95,26 +102,30 @@ def get_feature_df(uuid, *args, **kwargs):
     if add_recommended_delay:
         df.datetime = df.datetime + pd.Timedelta(seconds=ft_obj.suggested_delay_s)
 
-    if merge_asof:
-        df = pd.merge_asof(
-            merge_asof["left"].sort_values(merge_asof["sort_values"]),
-            df.sort_values(merge_asof["sort_values"]),
-            tolerance=merge_asof["tolerance"],
-            by=merge_asof["by"],
-            on=merge_asof["on"],
-            direction=merge_asof["direction"],
-        )
-
     if datetime_start:
         df = df[df.datetime >= datetime_start]
 
     if datetime_end:
         df = df[df.datetime <= datetime_end]
 
+    if invert_col:
+        df[invert_col] = 1 / df[invert_col]
+        df[invert_col] = df[invert_col].replace([np.inf, -np.inf], np.nan)
+
     if normalize_group:
         df = fos.normalize_group(df, **normalize_group)
     elif normalize:
         df = fos.normalize(df, **normalize)
+
+    if merge_asof:
+        df = pd.merge_asof(
+            merge_asof["left"],
+            df.sort_values(merge_asof["sort_values"]),
+            tolerance=merge_asof["tolerance"],
+            by=merge_asof["by"],
+            on=merge_asof["on"],
+            direction=merge_asof["direction"],
+        )
 
     if pivot:
         df = df.pivot(**pivot)
