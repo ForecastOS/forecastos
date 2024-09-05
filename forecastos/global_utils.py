@@ -116,11 +116,6 @@ def get_feature_df(uuid, *args, **kwargs):
     if log10_col:
         df[log10_col] = np.log10(df[log10_col])
 
-    if normalize_group:
-        df = fos.normalize_group(df, **normalize_group)
-    elif normalize:
-        df = fos.normalize(df, **normalize)
-
     if merge_asof:
         df = pd.merge_asof(
             merge_asof["left"],
@@ -130,6 +125,11 @@ def get_feature_df(uuid, *args, **kwargs):
             on=merge_asof["on"],
             direction=merge_asof["direction"],
         )
+
+    if normalize_group:
+        df = fos.normalize_group(df, **normalize_group)
+    elif normalize:
+        df = fos.normalize(df, **normalize)
 
     if pivot:
         df = df.pivot(**pivot)
