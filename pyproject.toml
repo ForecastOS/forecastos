@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "forecastos"
-version = "0.1.2"
+version = "0.1.3"
 description = "Headless feature store, pre-engineered ML features, and tools for ML workflows. By quantitative investors at forecastos.com"
 authors = ["Charlie Reese <charlie.reese@hey.com>"]
 readme = "README.md"
