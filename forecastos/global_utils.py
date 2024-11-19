@@ -21,7 +21,9 @@ def normalize(df, *args, **kwargs):
 
     if winsorize_df:
         for col in cols_to_norm:
-            df.loc[:, col] = winsorize(df[col], limits=winsorize_limits)
+            df.loc[:, col] = winsorize(
+                df[col], limits=winsorize_limits, nan_policy="omit"
+            )
 
     if standardize_df:
         scaler = StandardScaler()
