@@ -81,6 +81,7 @@ def get_feature_df(uuid, *args, **kwargs):
     fillna = kwargs.get("fillna", False)
     fillna_value = kwargs.get("fillna_value", 0)
     rename_columns = kwargs.get("rename_columns", False)
+    add_delay_td = kwargs.get("add_delay_td", False)
 
     ft_obj = fos.Feature.get(uuid)
     df = ft_obj.get_df()
@@ -102,7 +103,9 @@ def get_feature_df(uuid, *args, **kwargs):
     if sort_values:
         df = df.sort_values(sort_values)
 
-    if add_recommended_delay:
+    if add_delay_td:
+        df.datetime = df.datetime + add_delay_td
+    elif add_recommended_delay:
         df.datetime = df.datetime + pd.Timedelta(seconds=ft_obj.suggested_delay_s)
 
     if datetime_start:
