@@ -48,9 +48,11 @@ class Forecast(Readable, Saveable):
 
         if res.ok:
             print(f"Forecast {self.name} saved.")
+            self.id = res.json()["id"]
+            return self
         else:
             print(res)
-            return False
+            return self
 
 
     def info(self):
