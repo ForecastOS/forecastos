@@ -21,7 +21,7 @@ class Forecast(Readable, Saveable):
 
     @classmethod
     def get(cls, id):
-        res = cls.get_request(path=f"/forecasts/{id}")
+        res = cls.get_request(path=f"/forecasts/{id}", use_team_key=True)
 
         if res.ok:
             return cls.sync_read(res.json())

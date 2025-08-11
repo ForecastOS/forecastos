@@ -7,9 +7,14 @@ class Saveable:
         pass
 
     @classmethod
-    def post_request(self, path="/", body={}):
+    def post_request(self, path="/", body={}, use_team_key=True):
+        if use_team_key:
+            api_key = forecastos.api_key_team            
+        else:
+            api_key = forecastos.api_key
+
         request_headers = {
-            "Authorization": f"Bearer {forecastos.api_key}",
+            "Authorization": f"Bearer {api_key}",
         }
 
         response = requests.post(

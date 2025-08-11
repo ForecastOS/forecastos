@@ -7,9 +7,14 @@ class Readable:
         pass
 
     @classmethod
-    def get_request(self, path="/", params={}):
+    def get_request(self, path="/", params={}, use_team_key=False):
+        if use_team_key:
+            api_key = forecastos.api_key_team            
+        else:
+            api_key = forecastos.api_key
+        
         request_headers = {
-            "Authorization": f"Bearer {forecastos.api_key}",
+            "Authorization": f"Bearer {api_key}",
         }
 
         response = requests.get(
