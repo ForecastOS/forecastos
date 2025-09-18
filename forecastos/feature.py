@@ -112,8 +112,8 @@ class Feature(Readable, FeatureEngineeringMixin):
         df = cls.apply_feature_engineering_logic(df, config, "features_derived", logic_dict_key='normalization', calculate_with="raw", global_logic_dict_key='feature_normalization')
 
         # Run post-norm adjustments on all (excl. normalized derived features)
-        df = cls.apply_feature_engineering_logic(df, config, "features", logic_dict_key='adjustments_post_normalization')
-        df = cls.apply_feature_engineering_logic(df, config, "features_derived", logic_dict_key='adjustments_post_normalization', calculate_with="raw")
+        df = cls.apply_feature_engineering_logic(df, config, "features", logic_dict_key='adjustments_post_normalization', global_logic_dict_key='feature_adjustments_post_normalization')
+        df = cls.apply_feature_engineering_logic(df, config, "features_derived", logic_dict_key='adjustments_post_normalization', calculate_with="raw", global_logic_dict_key='feature_adjustments_post_normalization')
 
         # D Calculate normalized derived features
         df = cls.apply_feature_engineering_logic(df, config, "features_derived", logic_dict_key='formula', calculate_with="normalized")
