@@ -1,4 +1,3 @@
-# feature_methods.py
 import numpy as np
 import pandas as pd
 import forecastos as fos
@@ -52,17 +51,55 @@ class FeatureEngineeringMixin:
     @classmethod
     def apply_winsorize(cls, df: pd.DataFrame, ft_name: str, arg_li: list):
         lower_q, upper_q, group_by = arg_li
-        df[ft_name] = (
-            df.groupby(group_by)[ft_name]
-            .transform(lambda x: x.clip(lower=x.quantile(lower_q), upper=x.quantile(upper_q)))
+        qs = (
+            df.groupby(group_by, observed=True)[ft_name]
+            .quantile([lower_q, upper_q])
+            .unstack(level=-1)
+            .rename(columns={lower_q: f'__{ft_name}_lo', upper_q: f'__{ft_name}_hi'})
         )
+        df = df.join(qs, on=group_by)
+        df[ft_name] = df[ft_name].clip(lower=df[f'__{ft_name}_lo'], upper=df[f'__{ft_name}_hi'])
+        df.drop(columns=[f'__{ft_name}_lo', f'__{ft_name}_hi'], inplace=True)
+        
         return df
 
     @classmethod
     def apply_standardize(cls, df: pd.DataFrame, ft_name: str, arg_li: list):
-        df[ft_name] = df.groupby(arg_li)[ft_name].transform(
-            lambda x: (x - x.mean()) / x.std(ddof=0)
+        stats = (
+            df.groupby(arg_li, observed=True)[ft_name]
+            .agg(['mean', 'std'])
+            .rename(columns={'mean': f'__{ft_name}_mu', 'std': f'__{ft_name}_sd'})
         )
+        df = df.join(stats, on=arg_li)
+        sd = df[f'__{ft_name}_sd'].replace(0, np.nan)
+        df[ft_name] = (df[ft_name] - df[f'__{ft_name}_mu']) / sd
+        df.drop(columns=[f'__{ft_name}_mu', f'__{ft_name}_sd'], inplace=True)
+        
+        return df
+
+    @classmethod
+    def apply_log(cls, df: pd.DataFrame, ft_name: str, arg_li: list):
+        min_val = df[ft_name].min()
+        shift = 1
+
+        if min_val <= 0:
+            # Shift ensures no log(0); only applied if min value <= 0
+            df[ft_name] = df[ft_name] + abs(min_val) + shift
+
+        df[ft_name] = np.log10(df[ft_name])
+
+        return df
+
+    @classmethod
+    def apply_shift(cls, df: pd.DataFrame, ft_name: str, arg_li: list):
+        shift_i = arg_li[0]
+        shift_sort_values_li = arg_li[1]
+        shift_group_by = arg_li[2]
+
+        df = df.sort_values(shift_sort_values_li)
+
+        df[ft_name] = df.groupby(shift_group_by)[ft_name].shift(shift_i)        
+
         return df
 
     @classmethod
