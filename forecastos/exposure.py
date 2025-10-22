@@ -14,7 +14,7 @@ class Exposure(Readable, FeatureEngineeringMixin):
 
         if res.ok:
             df = pd.read_csv(io.StringIO(res.text))
-            df[["poll_start_at", "poll_end_at", "filing_date"]] = df[["poll_start_at", "poll_end_at", "filing_date"]].apply(pd.to_datetime).apply(lambda col: col.dt.tz_localize(None))
+            df[["poll_start_at", "poll_end_at", "as_of"]] = df[["poll_start_at", "poll_end_at", "as_of"]].apply(pd.to_datetime).apply(lambda col: col.dt.tz_localize(None))
             return df
         else:
             print(res)
@@ -31,7 +31,7 @@ class Exposure(Readable, FeatureEngineeringMixin):
             print(f"Getting {exposure_name}.")
             tmp_exposure_df = cls.get_df(exposure["id"]).rename(columns={
                 "answer": exposure_name,
-                "filing_date": "datetime",
+                "as_of": "datetime",
             })[["ticker", "datetime", exposure_name]]
 
             for formula_name, arg_li in exposure.get("adjustments_pre_join", config.get("exposure_adjustments_pre_join", {})).items(): 
