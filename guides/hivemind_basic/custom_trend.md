@@ -16,7 +16,45 @@ Custom trends can be created and explored in the ForecastOS UI, where users defi
 
 Custom trends are available through the ForecastOS API for automated creation, updating, and retrieval.
 
-Detailed endpoint documentation is provided to clients with API access.
+### Example: Fetching Popularity Evolution For Custom Trend
+
+```bash
+curl -X POST "https://api.forecastos.com/api/v1/trends/custom" \
+-H "Authorization: Bearer YOUR_API_TOKEN" \
+-H "Content-Type: application/json" \
+-d '{
+  "trend": {
+    "text": "artificial intelligence",
+    "sensitivity": "medium",
+    "start_date": "2020-01-01"
+  }
+}'
+```
+
+**Parameters**
+
+| Parameter   | Type    | Default       | Required | Description                                                                                   |
+|------------|---------|---------------|----------|-----------------------------------------------------------------------------------------------|
+| text       | string  | —             | Yes      | The text for which to calculate the custom trend. This is used to generate the embedding.    |
+| sensitivity| string  | "medium"      | No       | Determines the rolling sum calculation sensitivity. Options: "low", "medium", "high", "exact", "fuzzy". |
+| start_date | string  | "2015-01-01"  | No       | Optional start date (YYYY-MM-DD) for the trend calculation. Defaults to 2015-01-01 if not provided. |
+
+
+**Response**
+
+```json
+{
+    "data": [
+
+    ],
+    "meta": {
+        "page": 1,
+        "per_page": 2500,
+        "total_count": 54600,
+        "total_pages": 22
+    }
+}
+```
 
 ## Open-Source Access
 
