@@ -16,7 +16,38 @@ Persistent trends are available in the ForecastOS UI, where users can compare pe
 
 Hivemind persistent trends are accessible through the ForecastOS API for systematic research and portfolio workflows.
 
-Endpoint details are available to clients with API access.
+### Example: Fetching Persistent Trends
+
+```bash
+curl -X GET "https://api.forecastos.com/api/v1/persistent_trends" \
+-H "Authorization: Bearer YOUR_API_TOKEN" \
+-H "Content-Type: application/json"
+```
+
+**Parameters**
+
+| Parameter                  | Type    | Default                         | Required | Description                                                                 |
+|----------------------------|---------|---------------------------------|----------|-----------------------------------------------------------------------------|
+| page                       | integer | 1                               | No       | Page number for paginated results.                                          |
+| min\_days\_market\_relevant | integer | 1                               | No       | Minimum number of days a trend must be flagged as market relevant.          |
+| filter\_start\_date         | string  | 2 years ago (UTC, date)         | No       | Start date (inclusive) for filtering trends by date.                        |
+| filter\_end\_date           | string  | Today (UTC, date)               | No       | End date (inclusive) for filtering trends by date.                          |
+
+**Response**
+
+```json
+{
+    "data": [
+
+    ],
+    "meta": {
+        "page": 1,
+        "per_page": 2500,
+        "total_count": 54600,
+        "total_pages": 22
+    }
+}
+```
 
 ## Open-Source Access
 
