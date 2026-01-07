@@ -18,20 +18,12 @@ Custom pipelines can be built and inspected in the ForecastOS UI, where users vi
 
 ## API Access
 
-Pipeline run creation and associated outputs are accessible via API.
+Associated outputs for pipeline runs are accessible via API.
 
-### Example: Running Pipelines
-
-```bash
-curl -X POST "https://api.forecastos.com/api/v1/pipelines/<>" \
--H "Authorization: Bearer YOUR_API_TOKEN" \
--H "Content-Type: application/json"
-```
-
-### Example: Fetching Pipeline Results
+### Example: Fetching Pipeline Run Results
 
 ```bash
-curl -X GET "https://api.forecastos.com/api/v1/pipelines/<PIPELINE_ID>" \
+curl -X GET "https://api.forecastos.com/api/v1/pipelines/<PIPELINE_ID>/runs/<PIPELINE_RUN_ID>" \
 -H "Authorization: Bearer YOUR_API_TOKEN" \
 -H "Content-Type: application/json"
 ```
