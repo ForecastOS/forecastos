@@ -38,13 +38,20 @@ curl -X GET "https://api.forecastos.com/api/v1/persistent_trends" \
 ```json
 {
     "data": [
-
+        {
+            "id": 1689,
+            "title": "ai, artificial, generative, ais",
+            "last_seen_at": "2025-11-10T22:22:01.039Z",
+            "instance_first_seen": "2024-02-01T00:00:00.000Z",
+            "instance_last_seen": "2025-11-10T00:00:00.000Z",
+            "weighted_instance_count": 649
+        }
     ],
     "meta": {
         "page": 1,
-        "per_page": 2500,
-        "total_count": 54600,
-        "total_pages": 22
+        "per_page": 100,
+        "total_count": 118,
+        "total_pages": 2
     }
 }
 ```
