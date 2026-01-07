@@ -22,7 +22,7 @@ curl -X GET "https://api.forecastos.com/api/v1/exposures/company/<EXPOSURE_ID>" 
 
 This returns a time-series CSV containing company-level exposure scores.
 
-## Open-Source
+## Open-Source Access
 
 Hivemind company exposures are accessible via the open-source `forecastos` Python library through the `Exposure` class.
 
