@@ -16,7 +16,7 @@ Custom trends can be created and explored in the ForecastOS UI, where users defi
 
 Custom trends are available through the ForecastOS API for automated creation, updating, and retrieval.
 
-### Example: Fetching Popularity Evolution For Custom Trend
+### Example: Fetching Custom Trend Popularity Evolution
 
 ```bash
 curl -X POST "https://api.forecastos.com/api/v1/trends/custom" \
