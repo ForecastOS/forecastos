@@ -31,14 +31,13 @@ curl -X POST "https://api.forecastos.com/api/v1/trends/custom" \
 }'
 ```
 
-**Parameters**
+**Query Parameters**
 
-| Parameter   | Type    | Default       | Required | Description                                                                                   |
-|------------|---------|---------------|----------|-----------------------------------------------------------------------------------------------|
-| text       | string  | —             | Yes      | The text for which to calculate the custom trend. This is used to generate the embedding.    |
-| sensitivity| string  | "medium"      | No       | Determines the rolling sum calculation sensitivity. Options: "low", "medium", "high", "exact", "fuzzy". |
-| start_date | string  | "2015-01-01"  | No       | Optional start date (YYYY-MM-DD) for the trend calculation. Defaults to 2015-01-01 if not provided. |
-
+| Parameter   | Type   | Default      | Required | Description                                                                                                                                                              |
+|-------------|--------|--------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| text        | string | -            | Yes      | The trend to search for. Use noun-like terms such as a person's name (Elon Musk), objects (electric cars), or general topics (artificial intelligence).                  |
+| sensitivity | string | "medium"     | No       | Controls how trend text is matched to relevant mentions. Semantic similarity options are "low", "medium", "high", while text similarity options are "exact" and "fuzzy". |
+| start_date  | string | "2015-01-01" | No       | Optional start date (YYYY-MM-DD) for the trend calculation. Defaults to 2015-01-01 if not provided.                                                                      |
 
 **Response**
 

@@ -26,7 +26,7 @@ curl -X GET "https://api.forecastos.com/api/v1/trends" \
 -H "Content-Type: application/json"
 ```
 
-**Parameters**
+**Query Parameters**
 
 | Parameter          | Type    | Default | Required | Description                                               |
 |-------------------|---------|---------|----------|-----------------------------------------------------------|
