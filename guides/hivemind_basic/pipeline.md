@@ -28,7 +28,7 @@ curl -X GET "https://api.forecastos.com/api/v1/pipelines/<PIPELINE_ID>/runs/<PIP
 -H "Content-Type: application/json"
 ```
 
-This returns a time-series CSV containing company-level results for your pipeline.
+This returns a time-series CSV containing company-level results for your pipeline run.
 
 ## Open-Source Access
 
