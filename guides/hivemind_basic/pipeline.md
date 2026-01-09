@@ -44,7 +44,7 @@ curl -X POST "https://api.forecastos.com/api/v1/pipelines/<PIPELINE_ID>/runs" \
 |------------------------|---------|---------------------|----------|---------------------------------------------------------------------------------------------------|
 | generate_charts        | boolean | pipeline default    | No       | If true, charts will be automatically generated once pipeline results are complete.                                               |
 | use\_latest\_data\_only   | boolean | pipeline default    | No       | If true, only the latest available data will be used for the pipeline run. Otherwise, a start and end date can be provided to limit the data range. ||
-| latest\_data\_as\_of\_date | string  | current date        | No       | The reference date for the latest filings, set this if use\_latest\_data\_only is true. Must be in YYYY-MM-DD format.                        |
+| latest\_data\_as\_of\_date | string  | current date        | No       | The reference date for the latest data, set this if use\_latest\_data\_only is true. Must be in YYYY-MM-DD format.                        |
 | start_date | string | "2016-01-01" | No | Only include data published from this date. Set this if use\_latest\_data\_only is false. Must be in YYYY-MM-DD format. |
 | end_date | string | current date | No | Only include data published up to this date. Set this if use\_latest\_data\_only is false. Must be in YYYY-MM-DD format. |                         |
 | variables              | object  | - | Yes      | A dictionary of variables for the pipeline. Must include keys for all expected pipeline variables. |
