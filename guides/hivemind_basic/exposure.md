@@ -10,7 +10,19 @@ Company exposures can be explored, created, customized, and downloaded in the Fo
 
 ![Hivemind Custom Trends](/screenshot_company_exposures.png)
 
-## Open-Source and API Access
+## API Access
+
+### Example: Fetching Exposures
+
+```bash
+curl -X GET "https://api.forecastos.com/api/v1/exposures/company/<EXPOSURE_ID>" \
+-H "Authorization: Bearer YOUR_API_TOKEN" \
+-H "Content-Type: application/json"
+```
+
+This returns a time-series CSV containing company-level exposure scores.
+
+## Open-Source Access
 
 Hivemind company exposures are accessible via the open-source `forecastos` Python library through the `Exposure` class.
 
