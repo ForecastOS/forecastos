@@ -49,6 +49,17 @@ curl -X POST "https://api.forecastos.com/api/v1/pipelines/<PIPELINE_ID>/runs" \
 | end_date | string | current date | No | Only include data published up to this date. Set this if use\_latest\_data\_only is false. Must be in YYYY-MM-DD format. |                         |
 | variables              | object  | - | Yes      | A dictionary of variables for the pipeline. Must include keys for all expected pipeline variables. |
 
+**Response**
+
+```json
+{
+  "id": 101,
+  "pipeline_id": 6,
+  "status": "running",
+  "created_at": "2026-01-12T18:22:14.050Z"
+}
+```
+
 ### Example: Fetching Pipeline Run Results
 
 ```bash
