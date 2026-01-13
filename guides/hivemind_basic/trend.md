@@ -31,7 +31,7 @@ curl -X GET "https://api.forecastos.com/api/v1/trends" \
 | Parameter          | Type    | Default | Required | Description                                               |
 |-------------------|---------|---------|----------|-----------------------------------------------------------|
 | page              | integer | 1       | No       | Page number for pagination.                                |
-| market_relevant   | boolean | false   | No       | Return trends that are only flagged as market relevant or not. |
+| market_relevant   | boolean | false   | No       | Only return trends that are flagged as market relevant or not. |
 | identified_on   | string | -   | No       | Only return trends that were identified on this date. Must be in YYYY-MM-DD format. |
 
 
