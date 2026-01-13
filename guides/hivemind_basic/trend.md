@@ -18,7 +18,49 @@ Hivemind Trends can be explored directly in the ForecastOS UI, where users can b
 
 Hivemind trends are available via the ForecastOS API for programmatic access and integration into research and portfolio workflows.
 
-More information is available to institutional clients with access.
+### Example: Fetching Trends
+
+```bash
+curl -X GET "https://api.forecastos.com/api/v1/trends" \
+-H "Authorization: Bearer YOUR_API_TOKEN" \
+-H "Content-Type: application/json"
+```
+
+**Query Parameters**
+
+| Parameter          | Type    | Default | Required | Description                                               |
+|-------------------|---------|---------|----------|-----------------------------------------------------------|
+| page              | integer | 1       | No       | Page number for pagination.                                |
+| market_relevant   | boolean | false   | No       | Return trends that are only flagged as market relevant or not. |
+
+
+**Response**
+
+```json
+{
+  "data": [
+    {
+      "id": 21141,
+      "start_date": "2025-05-24T00:00:00.000Z",
+      "end_date": "2025-06-23T00:00:00.000Z",
+      "title": "debate, argument, arguments, debates",
+      "market_relevant": false,
+      "trend_rank": 72,
+      "topic_size_rank": 117,
+      "short_term_growth_rank": 211,
+      "long_term_growth_rank": 116,
+      "short_term_growth": 1.0320599421203407,
+      "long_term_growth": 1.1348288716421182
+    }
+  ],
+  "meta": {
+    "page": 1,
+    "per_page": 2500,
+    "total_count": 54600,
+    "total_pages": 22
+  }
+}
+```
 
 ## Open-Source Access
 

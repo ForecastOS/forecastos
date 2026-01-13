@@ -16,7 +16,51 @@ Custom trends can be created and explored in the ForecastOS UI, where users defi
 
 Custom trends are available through the ForecastOS API for automated creation, updating, and retrieval.
 
-Detailed endpoint documentation is provided to clients with API access.
+### Example: Fetching Custom Trend Popularity Evolution
+
+```bash
+curl -X POST "https://api.forecastos.com/api/v1/trends/custom" \
+-H "Authorization: Bearer YOUR_API_TOKEN" \
+-H "Content-Type: application/json" \
+-d '{
+  "trend": {
+    "text": "artificial intelligence",
+    "sensitivity": "medium",
+    "start_date": "2020-01-01"
+  }
+}'
+```
+
+**Query Parameters**
+
+| Parameter   | Type   | Default      | Required | Description                                                                                                                                                              |
+|-------------|--------|--------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| text        | string | -            | Yes      | The trend to search for. Use noun-like terms such as a person's name (Elon Musk), objects (electric cars), or general topics (artificial intelligence).                  |
+| sensitivity | string | "medium"     | No       | Controls how trend text is matched to relevant mentions. Semantic similarity options are "low", "medium", "high", while text similarity options are "exact" and "fuzzy". |
+| start_date  | string | "2015-01-01" | No       | Optional start date (YYYY-MM-DD) for the trend calculation. Defaults to 2015-01-01 if not provided.                                                                      |
+
+**Response**
+
+```json
+{
+  "rolling_90d_popularity": {
+    "2026-01-01": "150.0",
+    "2026-01-02": "154.0",
+    "2026-01-03": "158.0",
+    "2026-01-04": "162.0",
+    "2026-01-05": "166.0",
+    "2026-01-06": "170.0"
+  },
+  "rolling_365d_popularity": {
+    "2026-01-01": "100.0",
+    "2026-01-02": "108.0",
+    "2026-01-03": "116.0",
+    "2026-01-04": "124.0",
+    "2026-01-05": "132.0",
+    "2026-01-06": "140.0"
+  }
+}
+```
 
 ## Open-Source Access
 
