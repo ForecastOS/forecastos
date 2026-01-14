@@ -1,6 +1,5 @@
 from forecastos.utils.readable import Readable
 from forecastos.utils.feature_engineering_mixin import FeatureEngineeringMixin
-import time
 import pandas as pd
 
 
@@ -16,6 +15,7 @@ class CustomTrend(Readable, FeatureEngineeringMixin):
             use_team_key=True
         )
         if not res.ok:
+            print(res)
             return False
 
         res_body = res.json()

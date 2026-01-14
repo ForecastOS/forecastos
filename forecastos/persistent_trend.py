@@ -21,6 +21,7 @@ class PersistentTrend(Readable, FeatureEngineeringMixin):
                 use_team_key=True
             )
             if not res.ok:
+                print(res)
                 return False
 
             res_body = res.json()
