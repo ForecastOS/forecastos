@@ -1,7 +1,5 @@
 import forecastos
 import requests
-import time
-import pandas as pd
 
 
 class Readable:
@@ -31,39 +29,6 @@ class Readable:
             )
 
         return response
-
-    @classmethod
-    def get_request_data_df_paginated(self, path="/", params={}, use_team_key=False, max_iterations=1000):
-        data = []
-        current_page = params.get('page', 1)
-
-        for _ in range(max_iterations):
-            res = self.get_request(
-                path=path,
-                params={**params, "page": current_page},
-                use_team_key=use_team_key
-            )
-            if not res.ok:
-                return False
-
-            res_body = res.json()
-
-            page_data = res_body.get('data')
-            if page_data is None or len(page_data) == 0:
-                # No data left
-                break
-
-            data.extend(page_data)
-
-            total_pages = res_body.get('meta', {}).get('total_pages')
-            if total_pages is None or current_page >= total_pages:
-                # Current page is last page
-                break
-
-            current_page += 1
-            time.sleep(0.1)  # dont overload our apis!
-
-        return pd.DataFrame.from_dict(data)
 
     @classmethod
     def sync_read(cls, obj):
