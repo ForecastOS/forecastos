@@ -12,7 +12,7 @@ class PersistentTrend(Readable, FeatureEngineeringMixin):
     def get_df(cls, params={}):
         max_iterations = 1000
         data = []
-        current_page = params.get('page', 1)
+        current_page = 1
 
         for _ in range(max_iterations):
             res = cls.get_request(
