@@ -20,6 +20,7 @@ class CustomTrend(Readable, FeatureEngineeringMixin):
 
         res_body = res.json()
 
+        # Extract rolling sums and combine into one df
         df_columns = ['date', 'popularity_score']
         rolling_90_df = pd.DataFrame(
             list(res_body.get('rolling_90d_popularity', {}).items()),
