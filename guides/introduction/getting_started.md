@@ -101,7 +101,7 @@ When calling the ForecastOS API directly (without the Python client), include th
 
 ```bash
 curl -H "Authorization: Bearer $FORECASTOS_API_KEY" \
-     https://api.forecastos.com/v1/your/endpoint
+     https://app.forecastos.com/v1/your/endpoint
 ```
 
 ## Next: The Choice Is Yours

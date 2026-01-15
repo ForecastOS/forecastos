@@ -21,7 +21,7 @@ Hivemind trends are available via the ForecastOS API for programmatic access and
 ### Example: Fetching Trends
 
 ```bash
-curl -X GET "https://api.forecastos.com/api/v1/trends" \
+curl -X GET "https://app.forecastos.com/api/v1/trends" \
 -H "Authorization: Bearer YOUR_API_TOKEN" \
 -H "Content-Type: application/json"
 ```

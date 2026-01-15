@@ -19,7 +19,7 @@ Custom trends are available through the ForecastOS API for automated creation, u
 ### Example: Fetching Custom Trend Popularity Evolution
 
 ```bash
-curl -X POST "https://api.forecastos.com/api/v1/trends/custom" \
+curl -X POST "https://app.forecastos.com/api/v1/trends/custom" \
 -H "Authorization: Bearer YOUR_API_TOKEN" \
 -H "Content-Type: application/json" \
 -d '{
