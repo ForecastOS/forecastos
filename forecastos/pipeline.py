@@ -13,7 +13,7 @@ class Pipeline(Readable, FeatureEngineeringMixin):
         res = cls.get_request(
             path=f"/pipelines/{pipeline_id}/runs/{run_id}", use_team_key=True)
         if not res.ok:
-            print(res)
+            print(res.text)
             return False
 
         return pd.read_csv(io.StringIO(res.text))
@@ -26,7 +26,7 @@ class Pipeline(Readable, FeatureEngineeringMixin):
             use_team_key=True
         )
         if not res.ok:
-            print(res)
+            print(res.text)
             return False
 
         return res.json()

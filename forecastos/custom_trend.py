@@ -15,7 +15,7 @@ class CustomTrend(Readable, FeatureEngineeringMixin):
             use_team_key=True
         )
         if not res.ok:
-            print(res)
+            print(res.text)
             return False
 
         res_body = res.json()
