@@ -15,6 +15,9 @@ scikit-learn = "^1.5.1"
 fastparquet = "^2024.5.0"
 scipy = "^1.13.1"
 
+[tool.poetry.group.dev.dependencies]
+pytest = "<9"
+python-dotenv = "^1.2.1"
 
 [build-system]
 requires = ["poetry-core"]
