@@ -69,6 +69,8 @@ The open-source ForecastOS Python library provides helpers to fetch, normalize, 
 
 Core trend construction and source ingestion remain managed services.
 
+### Example: Fetching Trends
+
 ```python
 import forecastos as fos
 
