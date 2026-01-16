@@ -18,7 +18,7 @@ Hivemind Trends can be explored directly in the ForecastOS UI, where users can b
 
 Hivemind trends are available via the ForecastOS API for programmatic access and integration into research and portfolio workflows.
 
-### Example: Fetching Trends
+### Example: Fetching Trends via API
 
 ```bash
 curl -X GET "https://app.forecastos.com/api/v1/trends" \
@@ -68,6 +68,27 @@ curl -X GET "https://app.forecastos.com/api/v1/trends" \
 The open-source ForecastOS Python library provides helpers to fetch, normalize, transform, and align Hivemind trend time series data for research and modeling workflows.
 
 Core trend construction and source ingestion remain managed services.
+
+### Example: Fetching Trends via OS
+```python
+import forecastos as fos
+
+df_trend = fos.Trend.get_df(
+  market_relevant=True,
+  identified_on_start='2025-11-09',
+  identified_on_end='2025-11-10'
+)
+```
+
+**Parameters**
+
+| Parameter          | Type    | Default | Required | Description                                               |
+|-------------------|---------|---------|----------|-----------------------------------------------------------|
+| market_relevant   | boolean | false   | No       | Only return trends that are flagged as market relevant or not. |
+| identified\_on\_start   | string | -   | No       | Only return trends that were identified after or on this date. Must be in YYYY-MM-DD format. |
+| identified\_on\_end   | string | -   | No       | Only return trends that were identified before or on this date. Must be in YYYY-MM-DD format. |
+
+This returns a time-series DataFrame for all the trends matching the filter parameters.
 
 ## Next: Hivemind Persistent Trends
 
