@@ -3,6 +3,3 @@
 .pypi_token
 dist/
 **/tmp
-.env
-.vscode
-.pytest_cache
