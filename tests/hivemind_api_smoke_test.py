@@ -44,9 +44,9 @@ def test_custom_trend_get_df():
 
 def test_persistent_trend_get_df():
     df = fos.PersistentTrend.get_df(
-        min_days_market_relevant=True,
-        filter_start_date='2025-11-10',
-        filter_end_date='2025-11-10'
+        min_days_market_relevant=100,
+        filter_start_date='2020-01-10',
+        filter_end_date='2025-01-01'
     )
 
     assert df is not False
