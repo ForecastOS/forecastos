@@ -8,7 +8,19 @@ class CustomTrend(Readable, FeatureEngineeringMixin):
         pass
 
     @classmethod
-    def get_df(cls, json={}):
+    def get_df(cls, text, sensitivity=None, start_date=None):
+        if not text:
+            print('The argument `text` is required')
+            return False
+
+        # Build json body, throw away any keys = None
+        json = {k: v for k, v in {
+            "text": text,
+            "sensitivity": sensitivity,
+            "start_date": start_date
+        }.items() if v is not None}
+        json = {'trend': json}
+
         res = cls.post_request(
             path="/trends/custom",
             json=json,
