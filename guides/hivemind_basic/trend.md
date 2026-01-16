@@ -69,6 +69,16 @@ The open-source ForecastOS Python library provides helpers to fetch, normalize, 
 
 Core trend construction and source ingestion remain managed services.
 
+```python
+import forecastos as fos
+
+df_trend = fos.Trend.get_df(params={
+  'market_relevant': True,
+  'identified_on_start': '2025-11-10',
+  'identified_on_end': '2025-11-10'
+})
+```
+
 ## Next: Hivemind Persistent Trends
 
 Let's explore [Hivemind Persistent Trends](/guides/hivemind_basic/persistent_trend) next.
