@@ -16,7 +16,7 @@ Custom trends can be created and explored in the ForecastOS UI, where users defi
 
 Custom trends are available through the ForecastOS API for automated creation, updating, and retrieval.
 
-### Example: Fetching Custom Trend Popularity Evolution Via API
+### Example: Fetching Custom Trend Popularity Evolution via API
 
 ```bash
 curl -X POST "https://api.forecastos.com/api/v1/trends/custom" \
@@ -68,7 +68,7 @@ The open-source ForecastOS Python library provides helpers for submitting custom
 
 Concept embedding, scoring, and source processing are handled within the managed Hivemind platform.
 
-### Example: Fetching Custom Trend Popularity Evolution Via OS
+### Example: Fetching Custom Trend Popularity Evolution via OS
 
 ```python
 import forecastos as fos
