@@ -19,7 +19,7 @@ Hivemind persistent trends are accessible through the ForecastOS API for systema
 ### Example: Fetching Persistent Trends
 
 ```bash
-curl -X GET "https://api.forecastos.com/api/v1/persistent_trends" \
+curl -X GET "https://app.forecastos.com/api/v1/persistent_trends" \
 -H "Authorization: Bearer YOUR_API_TOKEN" \
 -H "Content-Type: application/json"
 ```

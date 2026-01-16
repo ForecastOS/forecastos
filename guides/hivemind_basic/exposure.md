@@ -15,7 +15,7 @@ Company exposures can be explored, created, customized, and downloaded in the Fo
 ### Example: Fetching Exposures
 
 ```bash
-curl -X GET "https://api.forecastos.com/api/v1/exposures/company/<EXPOSURE_ID>" \
+curl -X GET "https://app.forecastos.com/api/v1/exposures/company/<EXPOSURE_ID>" \
 -H "Authorization: Bearer YOUR_API_TOKEN" \
 -H "Content-Type: application/json"
 ```

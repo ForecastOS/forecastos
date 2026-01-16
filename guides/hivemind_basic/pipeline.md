@@ -23,7 +23,7 @@ Pipeline run creation and associated outputs are accessible via API.
 ### Example: Running Pipelines
 
 ```bash
-curl -X POST "https://api.forecastos.com/api/v1/pipelines/<PIPELINE_ID>/runs" \
+curl -X POST "https://app.forecastos.com/api/v1/pipelines/<PIPELINE_ID>/runs" \
 -H "Authorization: Bearer YOUR_API_TOKEN" \
 -H "Content-Type: application/json" \
 -d '{
@@ -63,7 +63,7 @@ curl -X POST "https://api.forecastos.com/api/v1/pipelines/<PIPELINE_ID>/runs" \
 ### Example: Fetching Pipeline Run Results
 
 ```bash
-curl -X GET "https://api.forecastos.com/api/v1/pipelines/<PIPELINE_ID>/runs/<PIPELINE_RUN_ID>" \
+curl -X GET "https://app.forecastos.com/api/v1/pipelines/<PIPELINE_ID>/runs/<PIPELINE_RUN_ID>" \
 -H "Authorization: Bearer YOUR_API_TOKEN" \
 -H "Content-Type: application/json"
 ```
