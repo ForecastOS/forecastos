@@ -18,7 +18,7 @@ Hivemind Trends can be explored directly in the ForecastOS UI, where users can b
 
 Hivemind trends are available via the ForecastOS API for programmatic access and integration into research and portfolio workflows.
 
-### Example: Fetching Trends <span style="display:none;">API<span>
+### Example: Fetching Trends Via API
 
 ```bash
 curl -X GET "https://api.forecastos.com/api/v1/trends" \
@@ -69,7 +69,7 @@ The open-source ForecastOS Python library provides helpers to fetch, normalize, 
 
 Core trend construction and source ingestion remain managed services.
 
-### Example: Fetching Trends <span style="display:none;">OS<span>
+### Example: Fetching Trends Via OS
 ```python
 import forecastos as fos
 
