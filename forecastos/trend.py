@@ -9,10 +9,17 @@ class Trend(Readable, FeatureEngineeringMixin):
         pass
 
     @classmethod
-    def get_df(cls, params={}):
+    def get_df(cls, market_relevant=None, identified_on_start=None, identified_on_end=None):
         max_iterations = 1000
         data = []
         current_page = 1
+
+        # Build params, throw away any keys = None
+        params = {k: v for k, v in {
+            "market_relevant": market_relevant,
+            "identified_on_start": identified_on_start,
+            "identified_on_end": identified_on_end
+        }.items() if v is not None}
 
         for _ in range(max_iterations):
             res = cls.get_request(
