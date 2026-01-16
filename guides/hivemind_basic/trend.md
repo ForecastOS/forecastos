@@ -77,7 +77,6 @@ df_trend = fos.Trend.get_df(
   identified_on_start='2025-11-09',
   identified_on_end='2025-11-10'
 )
-
 ```
 
 **Parameters**
