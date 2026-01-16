@@ -12,7 +12,7 @@ Company exposures can be explored, created, customized, and downloaded in the Fo
 
 ## API Access
 
-### Example: Fetching Exposures
+### Example: Fetching Exposures <span style="display:none;">API<span>
 
 ```bash
 curl -X GET "https://api.forecastos.com/api/v1/exposures/company/<EXPOSURE_ID>" \
@@ -28,7 +28,7 @@ Hivemind company exposures are accessible via the open-source `forecastos` Pytho
 
 This class retrieves point-in-time company exposure data from the ForecastOS API and provides helpers to merge, normalize, and transform exposures for research and portfolio workflows.
 
-### Example: Fetching Exposures
+### Example: Fetching Exposures <span style="display:none;">OS<span>
 
 ```python
 import forecastos as fos

@@ -16,7 +16,7 @@ Persistent trends are available in the ForecastOS UI, where users can compare pe
 
 Hivemind persistent trends are accessible through the ForecastOS API for systematic research and portfolio workflows.
 
-### Example: Fetching Persistent Trends
+### Example: Fetching Persistent Trends <span style="display:none;">API<span>
 
 ```bash
 curl -X GET "https://api.forecastos.com/api/v1/persistent_trends" \
@@ -62,7 +62,7 @@ The open-source ForecastOS Python library includes utilities to retrieve persist
 
 Persistent trend construction logic and source weighting are handled within the managed Hivemind platform.
 
-### Example: Fetching Persistent Trends
+### Example: Fetching Persistent Trends <span style="display:none;">OS<span>
 
 ```python
 import forecastos as fos

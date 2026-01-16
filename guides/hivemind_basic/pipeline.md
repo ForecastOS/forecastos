@@ -20,7 +20,7 @@ Custom pipelines can be built and inspected in the ForecastOS UI, where users vi
 
 Pipeline run creation and associated outputs are accessible via API.
 
-### Example: Running Pipelines
+### Example: Running Pipelines <span style="display:none;">API<span>
 
 ```bash
 curl -X POST "https://api.forecastos.com/api/v1/pipelines/<PIPELINE_ID>/runs" \
@@ -60,7 +60,7 @@ curl -X POST "https://api.forecastos.com/api/v1/pipelines/<PIPELINE_ID>/runs" \
 }
 ```
 
-### Example: Fetching Pipeline Run Results
+### Example: Fetching Pipeline Run Results <span style="display:none;">API<span>
 
 ```bash
 curl -X GET "https://api.forecastos.com/api/v1/pipelines/<PIPELINE_ID>/runs/<PIPELINE_RUN_ID>" \
@@ -74,7 +74,7 @@ This returns a time-series CSV containing company-level results for your pipelin
 
 The open-source ForecastOS Python library provides helpers for consuming pipeline outputs and integrating them into downstream research, risk, and portfolio workflows.
 
-### Example: Running Pipelines
+### Example: Running Pipelines <span style="display:none;">OS<span>
 
 ```python
 import forecastos as fos
@@ -105,7 +105,7 @@ run_pipeline_response = fos.Pipeline.run_pipeline(
 | end_date | string | current date | No | Only include data published up to this date. Set this if use\_latest\_data\_only is false. Must be in YYYY-MM-DD format. |                         |
 | variables              | object  | - | Yes      | A dictionary of variables for the pipeline. Must include keys for all expected pipeline variables. |
 
-### Example: Fetching Pipeline Run Results
+### Example: Fetching Pipeline Run Results <span style="display:none;">OS<span>
 
 ```python
 df_pipeline_run_results = fos.Pipeline.get_df(pipeline_id=6, run_id=19)
