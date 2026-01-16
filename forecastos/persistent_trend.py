@@ -9,10 +9,17 @@ class PersistentTrend(Readable, FeatureEngineeringMixin):
         pass
 
     @classmethod
-    def get_df(cls, params={}):
+    def get_df(cls, min_days_market_relevant=None, filter_start_date=None, filter_end_date=None):
         max_iterations = 1000
         data = []
         current_page = 1
+
+        # Build params, throw away any keys = None
+        params = {k: v for k, v in {
+            "min_days_market_relevant": min_days_market_relevant,
+            "filter_start_date": filter_start_date,
+            "filter_end_date": filter_end_date
+        }.items() if v is not None}
 
         for _ in range(max_iterations):
             res = cls.get_request(
