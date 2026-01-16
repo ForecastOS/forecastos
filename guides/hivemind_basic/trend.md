@@ -79,6 +79,16 @@ df_trend = fos.Trend.get_df(params={
 })
 ```
 
+**Parameters**
+
+| Parameter          | Type    | Default | Required | Description                                               |
+|-------------------|---------|---------|----------|-----------------------------------------------------------|
+| market_relevant   | boolean | false   | No       | Only return trends that are flagged as market relevant or not. |
+| identified\_on\_start   | string | -   | No       | Only return trends that were identified after or on this date. Must be in YYYY-MM-DD format. |
+| identified\_on\_end   | string | -   | No       | Only return trends that were identified before or on this date. Must be in YYYY-MM-DD format. |
+
+This returns a time-series DataFrame for all the trends matching the filter parameters.
+
 ## Next: Hivemind Persistent Trends
 
 Let's explore [Hivemind Persistent Trends](/guides/hivemind_basic/persistent_trend) next.
