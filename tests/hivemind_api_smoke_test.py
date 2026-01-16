@@ -33,30 +33,32 @@ def set_fos_api_key_and_endpoint():
 
 
 def test_custom_trend_get_df():
-    df = fos.CustomTrend.get_df({
-        'trend': {
-            'text': 'Artificial Intelligence',
-            'start_date': '2020-01-01'
-        }
-    })
+    df = fos.CustomTrend.get_df(
+        text='Artificial Intelligence',
+        start_date='2020-01-01'
+    )
 
     assert df is not False
     assert not df.empty
 
 
 def test_persistent_trend_get_df():
-    df = fos.PersistentTrend.get_df()
+    df = fos.PersistentTrend.get_df(
+        min_days_market_relevant=True,
+        filter_start_date='2025-11-10',
+        filter_end_date='2025-11-10'
+    )
 
     assert df is not False
     assert not df.empty
 
 
 def test_trend_get_df():
-    df = fos.Trend.get_df(params={
-        'market_relevant': True,
-        'identified_on_start': '2025-11-10',
-        'identified_on_end': '2025-11-10'
-    })
+    df = fos.Trend.get_df(
+        market_relevant=True,
+        identified_on_start='2025-11-10',
+        identified_on_end='2025-11-10'
+    )
 
     assert df is not False
     assert not df.empty
