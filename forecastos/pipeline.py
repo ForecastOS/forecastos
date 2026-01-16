@@ -19,10 +19,10 @@ class Pipeline(Readable, FeatureEngineeringMixin):
         return pd.read_csv(io.StringIO(res.text))
 
     @classmethod
-    def run_pipeline(cls, pipeline_id, json={}):
+    def run_pipeline(cls, pipeline_id, config={}):
         res = cls.post_request(
             path=f"/pipelines/{pipeline_id}/runs",
-            json=json,
+            json=config,
             use_team_key=True
         )
         if not res.ok:
