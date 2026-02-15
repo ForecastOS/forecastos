@@ -14,7 +14,7 @@ ForecastOS offers the following solutions to institutional investors:
 
 - **Hivemind**: a NLP / genAI engine that turns unstructured data firehoses (podcasts, filings, etc.) into clean, point-in-time factors. View trends and portfolio exposures. Generate synthetic factors. Discover emergent themes. Quantify consensus interest. Generate factors for anything from point-in-time data.
 - **FeatureHub**: pull pre-engineered feature / factor data anywhere in 1 line of code; no data engineering pipeline required. Save the 50-80% of research time you spend on data engineering. Access 1000s of point-in-time (PIT) factors.
-- **InvestOS**: an opinionated framework for constructing and backtesting portfolios in a consistent, albeit flexible way. We built it to make institutional-grade backtesting and portfolio optimization simple, extensible, and open-source.
+- **Portfolio Management (PM)**: an opinionated framework for constructing and backtesting portfolios in a consistent, albeit flexible way. We built it to make institutional-grade backtesting and portfolio optimization simple, extensible, and open-source.
 
 We'll cover each of the above solutions in the following guides, all of which have UI, API, and open-source (OS) functionality. 
 
@@ -110,7 +110,7 @@ Now that authentication is set up, what's next is up to you:
 
 - **WE RECOMMEND**: check out [Why Hivemind](/guides/hivemind_basic/why_hivemind) if you want to dive into our marquee solution.
 - Check out [Why FeatureHub](/guides/featurehub/why_featurehub) if you want to explore FeatureHub.
-- Check out [Why InvestOS](/guides/investos/why_investos) if you want to check out our open-source portfolio construction and backtesting solution.
+- Check out [Why Portfolio Management (PM)](/guides/portfolio_management_(pm)_introduction/why_pm) if you want to check out our open-source portfolio construction and backtesting solution.
 - Check out [UI vs API vs Open-Source](/guides/other/ui_vs_api_vs_os) for thoughts on when the ForecastOS UI is a good vs bad fit vs programmatic access.
 
 
