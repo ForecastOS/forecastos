@@ -16,19 +16,9 @@ load_dotenv()
 
 @pytest.fixture(autouse=True)
 def set_fos_api_key_and_endpoint():
-    def get_env_var(name):
-        env_var = os.environ.get(name)
-        if not env_var:
-            raise RuntimeError(f"{name} not set")
-
-        return env_var
-
-    api_key = get_env_var("FOS_API_KEY")
-    endpoint = get_env_var("FOS_API_ENDPOINT")
-
-    fos.api_key = api_key
-    fos.api_key_team = api_key
-    fos.api_endpoint = endpoint
+    fos.api_key = os.environ.get("FORECASTOS_API_KEY", "")
+    fos.api_key_team = os.environ.get("FORECASTOS_API_KEY_TEAM", "")
+    fos.api_endpoint = os.environ.get("FORECASTOS_API_ENDPOINT") or fos.api_endpoint
     yield
 
 

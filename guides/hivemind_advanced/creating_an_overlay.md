@@ -20,5 +20,5 @@ What's next is up to you:
 
 - **WE RECOMMEND**: [why FeatureHub](/guides/featurehub/why_featurehub) if you want to explore FeatureHub.
 - Check out [Why Hivemind](/guides/hivemind_basic/why_hivemind) if you want to dive into our marquee solution.
-- Check out [Why InvestOS](/guides/investos/why_investos) if you want to check out our open-source portfolio construction and backtesting solution.
+- Check out [Why Portfolio Management (PM)](/guides/portfolio_management_(pm)_introduction/why_pm) if you want to check out our open-source portfolio construction and backtesting solution.
 - Check out [UI vs API vs Open-Source](/guides/other/ui_vs_api_vs_os) for thoughts on when the ForecastOS UI is a good vs bad fit vs programmatic access.

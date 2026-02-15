@@ -37,7 +37,7 @@ df = fos.get_feature_df("97c4fb88-7d1d-4d54-aa3e-4aaac0ba771d")
 
 What's next is up to you:
 
-- **WE RECOMMEND**: check out [Why InvestOS](/guides/investos/why_investos) if you want to check out our open-source portfolio construction and backtesting solution.
+- **WE RECOMMEND**: check out [Why Portfolio Management (PM)](/guides/portfolio_management_(pm)_introduction/why_pm) if you want to check out our open-source portfolio construction and backtesting solution.
 - Check out [Why Hivemind](/guides/hivemind_basic/why_hivemind) if you want to dive into our marquee solution.
 - Check out [Why FeatureHub](/guides/featurehub/why_featurehub) if you want to explore FeatureHub.
 - Check out [UI vs API vs Open-Source](/guides/other/ui_vs_api_vs_os) for thoughts on when the ForecastOS UI is a good vs bad fit vs programmatic access.
