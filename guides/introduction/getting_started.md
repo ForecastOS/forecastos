@@ -104,7 +104,7 @@ curl -H "Authorization: Bearer $FORECASTOS_API_KEY" \
      https://app.forecastos.com/v1/your/endpoint
 ```
 
-### Creating a New API Key
+#### Creating a New API Key
 
 Follow the steps below to create a new key via the UI.
 
