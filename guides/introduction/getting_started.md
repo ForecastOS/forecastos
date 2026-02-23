@@ -106,7 +106,7 @@ curl -H "Authorization: Bearer $FORECASTOS_API_KEY" \
 
 ### Creating a New API Key
 
-Follow the steps below to create a new API Key via the UI.
+Follow the steps below to create a new key via the UI.
 
 1. Navigate to the user settings screen.
 ![Navigate to user settings](/guides/create-api-key-1.png)
