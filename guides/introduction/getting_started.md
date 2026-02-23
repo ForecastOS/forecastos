@@ -22,7 +22,7 @@ Speaking of which, let's cover how to set up both UI and programmatic access nex
 
 ## ForecastOS UI Access
 
-The ForecastOS application UI can be accessed at [app.forecastos.com](https://app.forecastos.com). Only exployees from institutions with active subscriptions will have access to the platform. 
+The ForecastOS application UI can be accessed at [app.forecastos.com](https://app.forecastos.com). Only employees from institutions with active subscriptions will have access to the platform. 
 
 ### Logging In
 
