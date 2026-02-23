@@ -110,9 +110,9 @@ Follow the steps below to create a new key via the UI.
 
 1. Navigate to the user settings screen.
 ![Navigate to user settings](/guides/create-api-key-1.png)
-2. Click "API Keys".
+2. Click "API Keys."
 ![View API Keys](/guides/create-api-key-2.png)
-3. Click "Create a new API Key". You will only see the full key once, so copy and store it safely.
+3. Click "Create a new API Key." You will only see the full key once, so copy and store it safely.
 ![Create new API Key](/guides/create-api-key-3.png)
 
 ## Next: The Choice Is Yours
