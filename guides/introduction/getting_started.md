@@ -22,7 +22,7 @@ Speaking of which, let's cover how to set up both UI and programmatic access nex
 
 ## ForecastOS UI Access
 
-The ForecastOS application UI can be accessed at [app.forecastos.com](https://app.forecastos.com). Only exployees from institutions with active subscriptions will have access to the platform. 
+The ForecastOS application UI can be accessed at [app.forecastos.com](https://app.forecastos.com). Only employees from institutions with active subscriptions will have access to the platform. 
 
 ### Logging In
 
@@ -103,6 +103,17 @@ When calling the ForecastOS API directly (without the Python client), include th
 curl -H "Authorization: Bearer $FORECASTOS_API_KEY" \
      https://app.forecastos.com/v1/your/endpoint
 ```
+
+#### Creating a New API Key
+
+Follow the steps below to create a new key via the UI.
+
+1. Navigate to the user settings screen.
+![Navigate to user settings](/guides/create-api-key-1.png)
+2. Click "API Keys."
+![View API Keys](/guides/create-api-key-2.png)
+3. Click "Create a new API Key." You will only see the full key once, so copy and store it safely as an environment variable (see above section on recommended naming).
+![Create new API Key](/guides/create-api-key-3.png)
 
 ## Next: The Choice Is Yours
 
