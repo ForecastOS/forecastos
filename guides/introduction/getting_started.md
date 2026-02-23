@@ -73,7 +73,7 @@ import forecastos as fos
 
 ### Authentication
 
-ForecastOS uses API keys (created via the UI) to authenticate requests.
+ForecastOS uses API keys (created via the UI) to authenticate requests. 
 
 We recommended setting and providing the key via an environment variable (to avoid hard-coding secrets in your source code):
 
