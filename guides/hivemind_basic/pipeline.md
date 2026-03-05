@@ -16,6 +16,40 @@ Custom pipelines can be built and inspected in the ForecastOS UI, where users vi
 
 ![Hivemind Custom Pipeline](/screenshot_exposure_pipeline.png)
 
+## Injecting Data Into Prompt Templates
+
+Prompt templates for a node can be edited in the UI by clicking the node in the pipeline editor. Prompts support dynamic data injection using our custom DSL (Domain-Specific Language).
+
+DSL expressions are wrapped with the delimiters `<!fos= ... /fos>` and consist of a **lookup method** followed by one or more **DSL function calls**.
+
+Example:
+
+```bash
+<!fos= LOOKUP_BY:{lookup_method}, {dsl_function} /fos>
+```
+
+Multiple DSL functions can be nested, where the output of one function becomes the input to another (e.g., `func_a(func_b(func_c()))`).
+
+Below are the available lookup methods and DSL functions. In addition to the functions listed here, any function defined in `forecastos.FeatureEngineeringMixin` can also be called.
+
+### Lookup Methods
+
+| Lookup Method | Description |
+|---------------|-------------|
+| **DATETIME** | Returns the most recent record available at or before the specified datetime. |
+| **TICKER\_AND\_DATETIME** | Returns the most recent record for the specified ticker at or before the specified datetime. |
+| **CONSTANT** | Returns the provided value directly without performing a data lookup. |
+
+### DSL Functions
+
+| DSL Function | Description | Example Usage |
+|--------|-------------|--------------|
+| **feature\_hub\_feature** | Returns a FeatureHub feature identified by its UUID. | `<!fos= LOOKUP_BY:TICKER_AND_DATETIME, feature_hub_feature("<FEATUREHUB_UUID>") /fos>` |
+| **filing\_section\_annual** | Returns the text of a specified section from a company's annual filing. | `<!fos= LOOKUP_BY:TICKER_AND_DATETIME, filing_section_annual("business") /fos>` |
+| **pipeline\_outputs** | Returns a value from the JSON output of a previous pipeline node using the specified key. | `<!fos= LOOKUP_BY:CONSTANT, pipeline_outputs("<KEY_NAME>") /fos>` |
+| **pipeline\_config\_variables** | Returns the value of a pipeline run variable using the specified key. | `<!fos= LOOKUP_BY:CONSTANT, pipeline_config_variables("<KEY_NAME>") /fos>` |
+| **pit\_context** | Returns point-in-time context data for the specified ID and key. | `<!fos= LOOKUP_BY:DATETIME, pit_context(<PIT_CONTEXT_ID>, "summary") /fos>` |
+
 ## API Access
 
 Pipeline run creation and associated outputs are accessible via API.
