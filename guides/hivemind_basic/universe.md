@@ -10,7 +10,7 @@ Universes are used when generating company exposures to control which companies 
 
 Universes can be explored, created, customized, and downloaded in the ForecastOS UI.
 
-![Hivemind Custom Trends](/screenshot_company_exposures.png)
+![Hivemind Custom Trends](/screenshot_universes.png)
 
 ## API Access
 
