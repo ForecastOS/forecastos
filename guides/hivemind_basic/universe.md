@@ -24,6 +24,6 @@ curl -X PATCH "https://app.forecastos.com/api/v1/universes/<UNIVERSE_ID>" \
 
 This updates the companies in the universe using the provided CSV file. [Click here to download an example CSV.](/example_universe_upload.csv)
 
-## Next: Hivemind PIT Context
+## Next: Hivemind Risk Applications
 
-Let's explore [Hivemind PIT Context](/guides/hivemind_basic/pit_context) next.
+Let's explore [Hivemind Risk Applications](/guides/hivemind_advanced/risk_applications) next.

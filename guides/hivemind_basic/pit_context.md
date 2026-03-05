@@ -12,6 +12,6 @@ PIT context can be generated and explored in the ForecastOS UI, where users can 
 
 ![Hivemind PIT Context](/screenshot_pit_context.png)
 
-## Next: Hivemind Risk Applications
+## Next: Hivemind Universes
 
-Let's explore [Hivemind Risk Applications](/guides/hivemind_advanced/risk_applications) next.
+Let's explore [Hivemind Universes](/guides/hivemind_basic/universe) next.
