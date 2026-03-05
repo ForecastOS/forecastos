@@ -4,7 +4,7 @@
 
 Hivemind universes allow users to define custom sets of companies and the time periods during which those companies are active. By specifying tickers with optional start and end dates, users control which companies are in the universe and when.
 
-Universes are used when generating company exposures to control which companies are included.
+Universes are used when generating company exposures and running pipelines to control which companies are included.
 
 ## UI Access
 
