@@ -22,16 +22,6 @@ curl -X GET "https://app.forecastos.com/api/v1/exposures/company/<EXPOSURE_ID>" 
 
 This returns a time-series CSV containing company-level exposure scores.
 
-### Example: Updating Exposure Universe via API
-
-```bash
-curl -X PATCH "https://app.forecastos.com/api/v1/universes/<UNIVERSE_ID>" \
--H "Authorization: Bearer YOUR_API_TOKEN" \
--F "companies_csv=@<PATH_TO_COMPANIES_CSV>"
-```
-
-This updates the companies in the universe using the provided CSV file. [Click here to download an example CSV.](/example_universe_upload.csv)
-
 ## Open-Source Access
 
 Hivemind company exposures are accessible via the open-source `forecastos` Python library through the `Exposure` class.
