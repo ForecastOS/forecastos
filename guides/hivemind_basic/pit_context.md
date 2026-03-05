@@ -2,7 +2,7 @@
 
 ## What Is Hivemind PIT Context?
 
-Hivemind PIT (Point-in-Time) context generates structured point-in-time information on a collective narrative.
+Hivemind PIT context generates structured point-in-time information on a collective narrative.
 
 By specifying a topic and generation frequency, users can create periodic narrative snapshots containing synthesized summaries and key events.
 
