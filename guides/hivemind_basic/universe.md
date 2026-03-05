@@ -2,11 +2,13 @@
 
 ## What Are Hivemind Universes?
 
-Hivemind company exposures measure how strongly each company is associated with specific trends, narratives, or themes at a given point in time. They map any custom-defined exposure onto individual securities, producing cross-sectional exposure scores that can be used for risk analysis, attribution, portfolio construction, and alpha.
+Hivemind universes allow users to define custom sets of companies and the time periods during which those companies are active. By specifying tickers with optional start and end dates, users control which companies are in the universe and when.
+
+Universes are used when generating company exposures to control which companies are included.
 
 ## UI Access
 
-Company exposures can be explored, created, customized, and downloaded in the ForecastOS UI, where users can analyze exposures by company, sector, or market portfolio and monitor how exposures have evolved throughout time.
+Universes can be explored, created, customized, and downloaded in the ForecastOS UI.
 
 ![Hivemind Custom Trends](/screenshot_company_exposures.png)
 
