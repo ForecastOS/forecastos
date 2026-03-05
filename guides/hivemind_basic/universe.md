@@ -14,7 +14,7 @@ Universes can be explored, created, customized, and downloaded in the ForecastOS
 
 ## API Access
 
-### Example: Updating Exposure Universe via API
+### Example: Updating Universes via API
 
 ```bash
 curl -X PATCH "https://app.forecastos.com/api/v1/universes/<UNIVERSE_ID>" \
