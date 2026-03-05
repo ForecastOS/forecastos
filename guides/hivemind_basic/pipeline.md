@@ -147,6 +147,6 @@ df_pipeline_run_results = fos.Pipeline.get_df(pipeline_id=6, run_id=19)
 
 This returns a time-series DataFrame containing company-level results for your pipeline run.
 
-## Next: Hivemind Risk Applications
+## Next: Hivemind PIT Context
 
-Let's explore [Hivemind Risk Applications](/guides/hivemind_advanced/risk_applications) next.
+Let's explore [Hivemind PIT Context](/guides/hivemind_basic/pit_context) next.
