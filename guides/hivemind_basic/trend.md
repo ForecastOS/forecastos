@@ -42,7 +42,6 @@ curl -X GET "https://app.forecastos.com/api/v1/trends" \
   "data": [
     {
       "id": 21141,
-      "start_date": "2025-05-24T00:00:00.000Z",
       "end_date": "2025-06-23T00:00:00.000Z",
       "title": "debate, argument, arguments, debates",
       "market_relevant": false,
