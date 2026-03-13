@@ -64,7 +64,7 @@ curl -X POST "https://app.forecastos.com/api/v1/trends/custom" \
 
 ### Example: Fetching Associated Exposures via API
 
-This returns exposures associated with a custom trend, sorted by similarity (highest first).
+This returns company exposures associated with a custom trend, sorted by similarity (highest first).
 
 ```bash
 curl -X GET "https://app.forecastos.com/api/v1/trends/custom/<CUSTOM_TREND_ID>/associated_exposures" \

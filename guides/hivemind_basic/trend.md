@@ -64,7 +64,7 @@ curl -X GET "https://app.forecastos.com/api/v1/trends" \
 
 ### Example: Fetching Associated Exposures via API
 
-This returns exposures associated with a trend, sorted by similarity (highest first).
+This returns company exposures associated with a trend, sorted by similarity (highest first).
 
 ```bash
 curl -X GET "https://app.forecastos.com/api/v1/trends/<TREND_ID>/associated_exposures" \
