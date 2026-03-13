@@ -22,6 +22,36 @@ curl -X GET "https://app.forecastos.com/api/v1/exposures/company/<EXPOSURE_ID>" 
 
 This returns a time-series CSV containing company-level exposure scores.
 
+### Example: Fetching Exposure Info via API
+
+```bash
+curl -X GET "https://app.forecastos.com/api/v1/exposures/company/<EXPOSURE_ID>/info" \
+-H "Authorization: Bearer YOUR_API_TOKEN" \
+-H "Content-Type: application/json"
+```
+
+**Response**
+
+```json
+{
+    "id": 1,
+    "title": "AI and Generative AI Exposure",
+    "exposure_topic": "AI and Generative AI",
+    "exposure_pipeline_id": 1,
+    "exposure_pipeline_slug": "v1.0-causality",
+    "universe_id": 1,
+    "universe_name": "No Revenue Threshold",
+    "universe_config": {
+        "end_date": "2026-03-11",
+        "start_date": "2020-03-10",
+        "interval_frequency_days": 365,
+        "include_new_annual_filings": false
+    },
+    "created_at": "2026-03-11T00:52:31.446Z",
+    "updated_at": "2026-03-11T00:52:31.446Z"
+}
+```
+
 ## Open-Source Access
 
 Hivemind company exposures are accessible via the open-source `forecastos` Python library through the `Exposure` class.
