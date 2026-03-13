@@ -56,6 +56,44 @@ curl -X GET "https://app.forecastos.com/api/v1/persistent_trends" \
 }
 ```
 
+### Example: Fetching Associated Exposures via API
+
+This returns company exposures associated with a persistent trend, sorted by similarity (highest first).
+
+```bash
+curl -X GET "https://app.forecastos.com/api/v1/persistent_trends/<PERSISTENT_TREND_ID>/associated_exposures" \
+-H "Authorization: Bearer YOUR_API_TOKEN" \
+-H "Content-Type: application/json"
+```
+
+**Query Parameters**
+
+| Parameter          | Type    | Default | Required | Description                                               |
+|-------------------|---------|---------|----------|-----------------------------------------------------------|
+| page              | integer | 1       | No       | Page number for pagination.                                |
+
+**Response**
+
+```json
+{
+  "data": [
+    {
+        "id": 1,
+        "title": "Venezuela",
+        "created_at": "2026-03-09T23:37:30.466Z",
+        "updated_at": "2026-03-09T23:37:30.466Z",
+        "exposure_topic": "Venezuela"
+    }
+  ],
+  "meta": {
+      "page": 1,
+      "per_page": 5000,
+      "total_count": 2,
+      "total_pages": 1
+  }
+}
+```
+
 ## Open-Source Access
 
 The open-source ForecastOS Python library includes utilities to retrieve persistent trend data and apply common transformations.
