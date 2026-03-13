@@ -62,6 +62,44 @@ curl -X GET "https://app.forecastos.com/api/v1/trends" \
 }
 ```
 
+### Example: Fetching Associated Exposures via API
+
+This returns exposures associated with a trend, sorted by similarity (highest first).
+
+```bash
+curl -X GET "https://app.forecastos.com/api/v1/trends/<TREND_ID>/associated_exposures" \
+-H "Authorization: Bearer YOUR_API_TOKEN" \
+-H "Content-Type: application/json"
+```
+
+**Query Parameters**
+
+| Parameter          | Type    | Default | Required | Description                                               |
+|-------------------|---------|---------|----------|-----------------------------------------------------------|
+| page              | integer | 1       | No       | Page number for pagination.                                |
+
+**Response**
+
+```json
+{
+  "data": [
+    {
+        "id": 1,
+        "title": "Venezuela",
+        "created_at": "2026-03-09T23:37:30.466Z",
+        "updated_at": "2026-03-09T23:37:30.466Z",
+        "exposure_topic": "Venezuela"
+    }
+  ],
+  "meta": {
+      "page": 1,
+      "per_page": 5000,
+      "total_count": 2,
+      "total_pages": 1
+  }
+}
+```
+
 ## Open-Source Access
 
 The open-source ForecastOS Python library provides helpers to fetch, normalize, transform, and align Hivemind trend time series data for research and modeling workflows.
