@@ -77,6 +77,7 @@ curl -X POST "https://app.forecastos.com/api/v1/pipelines/<PIPELINE_ID>/runs" \
 
 | Parameter              | Type    | Default             | Required | Description                                                                                       |
 |------------------------|---------|---------------------|----------|---------------------------------------------------------------------------------------------------|
+| team_ids | array of integers | pipeline default | No | Team IDs to associate with this run. |     
 | generate_charts        | boolean | pipeline default    | No       | If true, charts will be automatically generated once pipeline results are complete.                                               |
 | interval\_frequency\_days   | integer | pipeline default    | No       | Number of days between generated results. |
 | include\_new\_annual\_filings | boolean  | pipeline default    | No       | If true, additional results are generated when new annual filings become available. |
@@ -133,6 +134,7 @@ run_pipeline_response = fos.Pipeline.run_pipeline(
 
 | Parameter              | Type    | Default             | Required | Description                                                                                       |
 |------------------------|---------|---------------------|----------|---------------------------------------------------------------------------------------------------|
+| team_ids | array of integers | pipeline default | No | Team IDs to associate with this run. |     
 | generate_charts        | boolean | pipeline default    | No       | If true, charts will be automatically generated once pipeline results are complete.                                               |
 | use\_latest\_data\_only   | boolean | pipeline default    | No       | If true, only the latest available data will be used for the pipeline run. Otherwise, a start and end date can be provided to limit the data range. ||
 | latest\_data\_as\_of\_date | string  | current date        | No       | The reference date for the latest data, set this if use\_latest\_data\_only is true. Must be in YYYY-MM-DD format.                        |
