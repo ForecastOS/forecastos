@@ -35,10 +35,9 @@ curl -X GET "https://app.forecastos.com/api/v1/exposures/company/<EXPOSURE_ID>/i
 ```json
 {
     "id": 1,
-    "title": "AI and Generative AI Exposure",
     "exposure_topic": "AI and Generative AI",
     "exposure_pipeline_id": 1,
-    "exposure_pipeline_slug": "v1.0-causality",
+    "exposure_pipeline_name": "Company Exposures v1.0 Causality",
     "universe_id": 1,
     "universe_name": "No Revenue Threshold",
     "universe_config": {
