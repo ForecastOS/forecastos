@@ -79,6 +79,7 @@ curl -X GET "https://app.forecastos.com/api/v1/persistent_trends/<PERSISTENT_TRE
   "data": [
     {
         "id": 1,
+        "title": "Venezuela",
         "created_at": "2026-03-09T23:37:30.466Z",
         "updated_at": "2026-03-09T23:37:30.466Z",
         "exposure_topic": "Venezuela"
