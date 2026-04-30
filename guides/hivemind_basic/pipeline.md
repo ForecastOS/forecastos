@@ -61,6 +61,7 @@ curl -X POST "https://app.forecastos.com/api/v1/pipelines/<PIPELINE_ID>/runs" \
 -H "Authorization: Bearer YOUR_API_TOKEN" \
 -H "Content-Type: application/json" \
 -d '{
+  "title": "My Pipeline Run",
   "generate_charts": true,
   "interval_frequency_days": 365,
   "include_new_annual_filings": true,
@@ -77,6 +78,7 @@ curl -X POST "https://app.forecastos.com/api/v1/pipelines/<PIPELINE_ID>/runs" \
 
 | Parameter              | Type    | Default             | Required | Description                                                                                       |
 |------------------------|---------|---------------------|----------|---------------------------------------------------------------------------------------------------|
+| title | string | - | Yes | A title for this pipeline run. |
 | team_ids | array of integers | pipeline default | No | Team IDs to associate with this run. |     
 | generate_charts        | boolean | pipeline default    | No       | If true, charts will be automatically generated once pipeline results are complete.                                               |
 | interval\_frequency\_days   | integer | pipeline default    | No       | Number of days between generated results. |
