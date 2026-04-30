@@ -37,6 +37,7 @@ class SPO(BaseStrategy):
         risk_model: BaseRisk = None,
         solver=cvx.OSQP,
         solver_opts=None,
+        trade_datetimes: list = None,
         **kwargs,
     ):
         super().__init__(
@@ -54,6 +55,7 @@ class SPO(BaseStrategy):
         self.solver_opts = util.deep_dict_merge(
             self.BASE_SOLVER_OPTS, solver_opts or {}
         )
+        self.trade_datetimes = trade_datetimes
 
         self.metadata_properties = ["solver", "solver_opts"]
 
@@ -70,6 +72,9 @@ class SPO(BaseStrategy):
 
         if t is None:
             t = dt.datetime.today()
+
+        if self.trade_datetimes is not None and t not in self.trade_datetimes:
+            return self._zerotrade(holdings)
 
         value = sum(holdings)
         weights_portfolio = holdings / value  # Portfolio weights
