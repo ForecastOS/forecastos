@@ -1,6 +1,6 @@
 import os
 
-__version__ = "0.3.0"
+__version__ = "0.3.1"
 
 api_key = os.environ.get("FORECASTOS_API_KEY", "")
 api_key_team = os.environ.get("FORECASTOS_API_KEY_TEAM", "")

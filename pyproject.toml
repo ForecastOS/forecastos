@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "forecastos"
-version = "0.3.0"
+version = "0.3.1"
 description = "ForecastOS.com quantitative investing tools"
 authors = ["Charlie Reese <charlie.reese@hey.com>", "ForecastOS"]
 license = "MIT"
