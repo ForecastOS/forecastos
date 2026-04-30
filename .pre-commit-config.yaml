@@ -1,0 +1,10 @@
+repos:
+  - repo: local
+    hooks:
+      - id: hivemind-smoke-test
+        name: Hivemind API smoke test
+        entry: poetry run pytest tests/hivemind_api_smoke_test.py -q
+        language: system
+        verbose: true
+        pass_filenames: false
+        stages: [pre-commit]
