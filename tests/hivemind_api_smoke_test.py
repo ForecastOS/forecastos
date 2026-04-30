@@ -2,8 +2,8 @@
 Verify that GET endpoints for hivemind api are responsive. Does not test 
 endpoints that read or create db records. 
 
-Set FOS_API_KEY and FOS_API_ENDPOINT environment variables to the desired
-API key to use and server (local / prod).
+Set FORECASTOS_API_KEY, FORECASTOS_API_KEY_TEAM, and FORECASTOS_API_ENDPOINT
+environment variables to the desired API key to use and server (local / prod).
 """
 
 import os
@@ -18,7 +18,8 @@ load_dotenv()
 def set_fos_api_key_and_endpoint():
     fos.api_key = os.environ.get("FORECASTOS_API_KEY", "")
     fos.api_key_team = os.environ.get("FORECASTOS_API_KEY_TEAM", "")
-    fos.api_endpoint = os.environ.get("FORECASTOS_API_ENDPOINT") or fos.api_endpoint
+    fos.api_endpoint = os.environ.get(
+        "FORECASTOS_API_ENDPOINT") or fos.api_endpoint
     yield
 
 
