@@ -1,9 +1,10 @@
 """
-Verify that GET endpoints for hivemind api are responsive. Does not test 
-endpoints that read or create db records. 
+Verify that GET endpoints for hivemind api are responsive.
 
-Set FOS_API_KEY and FOS_API_ENDPOINT environment variables to the desired
-API key to use and server (local / prod).
+Set FORECASTOS_API_KEY, FORECASTOS_API_KEY_TEAM, and FORECASTOS_API_ENDPOINT
+environment variables to the desired API key to use and server (local / prod).
+
+Set EXPOSURE_ID to the id of an existing exposure to test against (defaults to 1).
 """
 
 import os
@@ -18,7 +19,8 @@ load_dotenv()
 def set_fos_api_key_and_endpoint():
     fos.api_key = os.environ.get("FORECASTOS_API_KEY", "")
     fos.api_key_team = os.environ.get("FORECASTOS_API_KEY_TEAM", "")
-    fos.api_endpoint = os.environ.get("FORECASTOS_API_ENDPOINT") or fos.api_endpoint
+    fos.api_endpoint = os.environ.get(
+        "FORECASTOS_API_ENDPOINT") or fos.api_endpoint
     yield
 
 
@@ -49,6 +51,13 @@ def test_trend_get_df():
         identified_on_start='2025-11-10',
         identified_on_end='2025-11-10'
     )
+
+    assert df is not False
+    assert not df.empty
+
+
+def test_exposure_get_df():
+    df = fos.Exposure.get_df(id=os.environ.get("EXPOSURE_ID", 1))
 
     assert df is not False
     assert not df.empty
