@@ -79,11 +79,12 @@ curl -X POST "https://app.forecastos.com/api/v1/pipelines/<PIPELINE_ID>/runs" \
 |------------------------|---------|---------------------|----------|---------------------------------------------------------------------------------------------------|
 | title | string | pipeline default | No | A title for your reference to identify this run. |
 | team_ids | array of integers | pipeline default | No | Team IDs to associate with this run. |     
+| universe_id | integer | pipeline default | No | ID of the universe to use for this run. |
 | generate_charts        | boolean | pipeline default    | No       | If true, charts will be automatically generated once pipeline results are complete.                                               |
 | interval\_frequency\_days   | integer | pipeline default    | No       | Number of days between generated results. |
 | include\_new\_annual\_filings | boolean  | pipeline default    | No       | If true, additional results are generated when new annual filings become available. |
-| start_date | string | "2016-01-01" | No | Only include data published from this date. Set this if use\_latest\_data\_only is false. Must be in YYYY-MM-DD format. |
-| end_date | string | current date | No | Only include data published up to this date. Set this if use\_latest\_data\_only is false. Must be in YYYY-MM-DD format. |                         |
+| start_date | string | "2016-01-01" | No | Only include data published from this date. Must be in YYYY-MM-DD format. |
+| end_date | string | current date | No | Only include data published up to this date. Must be in YYYY-MM-DD format. |
 | variables              | object  | - | Yes      | A dictionary of variables for the pipeline. Must include keys for all expected pipeline variables. |
 
 **Response**
@@ -120,7 +121,8 @@ run_pipeline_response = fos.Pipeline.run_pipeline(
   pipeline_id=6,
   config={
     "generate_charts": True,
-    "use_latest_data_only": True,
+    "interval_frequency_days": 365,
+    "include_new_annual_filings": True,
     "start_date": "2025-01-01",
     "end_date": "2026-01-01",
     "variables": {
@@ -135,12 +137,14 @@ run_pipeline_response = fos.Pipeline.run_pipeline(
 
 | Parameter              | Type    | Default             | Required | Description                                                                                       |
 |------------------------|---------|---------------------|----------|---------------------------------------------------------------------------------------------------|
+| title | string | pipeline default | No | A title for your reference to identify this run. |
 | team_ids | array of integers | pipeline default | No | Team IDs to associate with this run. |     
+| universe_id | integer | pipeline default | No | ID of the universe to use for this run. |
 | generate_charts        | boolean | pipeline default    | No       | If true, charts will be automatically generated once pipeline results are complete.                                               |
-| use\_latest\_data\_only   | boolean | pipeline default    | No       | If true, only the latest available data will be used for the pipeline run. Otherwise, a start and end date can be provided to limit the data range. ||
-| latest\_data\_as\_of\_date | string  | current date        | No       | The reference date for the latest data, set this if use\_latest\_data\_only is true. Must be in YYYY-MM-DD format.                        |
-| start_date | string | "2016-01-01" | No | Only include data published from this date. Set this if use\_latest\_data\_only is false. Must be in YYYY-MM-DD format. |
-| end_date | string | current date | No | Only include data published up to this date. Set this if use\_latest\_data\_only is false. Must be in YYYY-MM-DD format. |                         |
+| interval\_frequency\_days   | integer | pipeline default    | No       | Number of days between generated results. |
+| include\_new\_annual\_filings | boolean  | pipeline default    | No       | If true, additional results are generated when new annual filings become available. |
+| start_date | string | "2016-01-01" | No | Only include data published from this date. Must be in YYYY-MM-DD format. |
+| end_date | string | current date | No | Only include data published up to this date. Must be in YYYY-MM-DD format. |
 | variables              | object  | - | Yes      | A dictionary of variables for the pipeline. Must include keys for all expected pipeline variables. |
 
 ### Example: Fetching Pipeline Run Results via OS
