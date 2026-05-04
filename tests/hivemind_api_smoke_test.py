@@ -1,6 +1,5 @@
 """
-Verify that GET endpoints for hivemind api are responsive. Does not test
-endpoints that read or create db records.
+Verify that GET endpoints for hivemind api are responsive.
 
 Set FORECASTOS_API_KEY, FORECASTOS_API_KEY_TEAM, and FORECASTOS_API_ENDPOINT
 environment variables to the desired API key to use and server (local / prod).
