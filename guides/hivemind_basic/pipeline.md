@@ -77,6 +77,7 @@ curl -X POST "https://app.forecastos.com/api/v1/pipelines/<PIPELINE_ID>/runs" \
 
 | Parameter              | Type    | Default             | Required | Description                                                                                       |
 |------------------------|---------|---------------------|----------|---------------------------------------------------------------------------------------------------|
+| title | string | pipeline default | No | A title for your reference to identify this run. |
 | team_ids | array of integers | pipeline default | No | Team IDs to associate with this run. |     
 | generate_charts        | boolean | pipeline default    | No       | If true, charts will be automatically generated once pipeline results are complete.                                               |
 | interval\_frequency\_days   | integer | pipeline default    | No       | Number of days between generated results. |
