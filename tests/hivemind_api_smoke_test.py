@@ -53,3 +53,10 @@ def test_trend_get_df():
 
     assert df is not False
     assert not df.empty
+
+
+def test_exposure_get_df():
+    df = fos.Exposure.get_df(id=os.environ["EXPOSURE_ID"])
+
+    assert df is not False
+    assert not df.empty
