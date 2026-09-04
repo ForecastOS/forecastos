@@ -1,0 +1,27 @@
+{
+  "income_statement": {
+    "gross_revenue": [
+      {
+        "sum": ["revenue", {"tag": "cogs", "multiplier": -1}],
+        "require_all_terms": true
+      }
+    ]
+  },
+  "balance_sheet": {
+    "total_non_current_liabilities": [
+      {
+        "sum": [
+          "total_liabilities",
+          {"tag": "total_current_liabilities", "multiplier": -1}
+        ],
+        "require_all_terms": true
+      }
+    ],
+    "total_liabilities": [
+      {
+        "sum": ["total_current_liabilities", "total_non_current_liabilities"],
+        "require_all_terms": true
+      }
+    ]
+  }
+}

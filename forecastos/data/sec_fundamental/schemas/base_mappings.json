@@ -1,0 +1,293 @@
+{
+  "income_statement": {
+    "revenue": [
+      {"tag": "Revenues", "ignore_if_zero": true},
+      "RevenuesNetOfInterestExpense",
+      "RevenueFromContractWithCustomerExcludingAssessedTax",
+      "SalesRevenueNet",
+      {"sum": ["SalesRevenueGoodsNet", "SalesRevenueServicesNet"]},
+      "RevenueFromContractWithCustomerIncludingAssessedTax",
+      "RealEstateRevenueNet",
+      {"sum": ["NoninterestIncome", "InterestAndDividendIncomeOperating"]},
+      "OilAndGasRevenue",
+      "GrossInvestmentIncomeOperating",
+      "RevenueMineralSales",
+      "SegmentReportingInformationRevenueFromExternalCustomers"
+    ],
+    "cogs": [
+      "CostOfGoodsAndServicesSold",
+      "CostOfGoodsSold",
+      "CostOfRevenue",
+      "CostOfPurchasedOilAndGas"
+    ],
+    "gross_revenue": [],
+    "sg_and_a": [
+      "SellingGeneralAndAdministrativeExpense",
+      {
+        "sum": [
+          "GeneralAndAdministrativeExpense",
+          [
+            "MarketingExpense",
+            "SellingAndMarketingExpense",
+            "MarketingAndAdvertisingExpense"
+          ]
+        ]
+      }
+    ],
+    "r_and_d": [
+      "ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost",
+      "ResearchAndDevelopmentExpense",
+      "ResearchAndDevelopmentExpenseSoftwareExcludingAcquiredInProcessCost",
+      "ResearchAndDevelopmentAssetAcquiredOtherThanThroughBusinessCombinationWrittenOff"
+    ],
+    "operating_expenses": [
+      "OperatingExpenses",
+      "NoninterestExpense",
+      "CostsAndExpenses",
+      "BenefitsLossesAndExpenses"
+    ],
+    "operating_income_or_ebit": [
+      "OperatingIncomeLoss",
+      "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
+      "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest"
+    ],
+    "net_interest_expense": [
+      {"tag": "InterestIncomeExpenseNet", "multiplier": -1},
+      {
+        "sum": [
+          "InterestExpense",
+          [
+            {"tag": "InvestmentIncomeInterest", "multiplier": -1},
+            {
+              "tag": "InvestmentIncomeInterestAndDividend",
+              "multiplier": -1
+            },
+            {"tag": "InvestmentIncomeNet", "multiplier": -1},
+            {"tag": "InterestIncomeOther", "multiplier": -1},
+            {"tag": "InterestAndOtherIncome", "multiplier": -1}
+          ]
+        ],
+        "require_all_terms": true
+      }
+    ],
+    "other_expense": [
+      {"tag": "OtherNonoperatingIncomeExpenseOther", "multiplier": -1},
+      {"tag": "NoninterestIncomeOtherOperatingIncome", "multiplier": -1},
+      "OtherNonoperatingExpense",
+      {"tag": "OtherNonoperatingIncomeExpense", "multiplier": -1},
+      "OtherNoninterestExpense"
+    ],
+    "tax_expense": ["IncomeTaxExpenseBenefit"],
+    "net_income": ["IncomeLossFromContinuingOperations", "ProfitLoss", "NetIncomeLoss"],
+    "shares_out_avg": ["WeightedAverageNumberOfSharesOutstandingBasic"],
+    "shares_out_avg_diluted": ["WeightedAverageNumberOfDilutedSharesOutstanding"]
+  },
+  "cashflow_statement": {
+    "d_and_a_cf": [
+      "OtherDepreciationAndAmortization",
+      "DepreciationAndAmortization",
+      "DepreciationDepletionAndAmortization",
+      "DepreciationAmortizationAndAccretionNet",
+      {
+        "sum": [
+          "Depreciation",
+          ["AdjustmentForAmortization", "AmortizationOfIntangibleAssets"]
+        ]
+      }
+    ],
+    "operating_cf": [
+      "NetCashProvidedByUsedInOperatingActivitiesContinuingOperations",
+      "NetCashProvidedByUsedInOperatingActivities"
+    ],
+    "pp_and_e_cf": [
+      {
+        "sum": [
+          [
+            {
+              "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+              "multiplier": -1
+            },
+            {
+              "tag": "PaymentsToAcquireOtherPropertyPlantAndEquipment",
+              "multiplier": -1
+            },
+            {"tag": "PaymentsToAcquireProductiveAssets", "multiplier": -1}
+          ],
+          [
+            "ProceedsFromSaleOfPropertyPlantAndEquipment",
+            "ProceedsFromSaleOfProductiveAssets"
+          ]
+        ]
+      }
+    ],
+    "investing_cf": [
+      "NetCashProvidedByUsedInInvestingActivitiesContinuingOperations",
+      "NetCashProvidedByUsedInInvestingActivities"
+    ],
+    "dividend_cf": [
+      {"tag": "PaymentsOfDividends", "multiplier": -1},
+      {
+        "sum": [
+          {"tag": "PaymentsOfDividendsCommonStock", "multiplier": -1},
+          {
+            "tag": "PaymentsOfDividendsPreferredStockAndPreferenceStock",
+            "multiplier": -1
+          },
+          {"tag": "PaymentsOfOrdinaryDividends", "multiplier": -1}
+        ]
+      }
+    ],
+    "stock_issuance_cf": [
+      "ProceedsFromRepurchaseOfEquity",
+      {
+        "sum": [
+          {"tag": "PaymentsForRepurchaseOfCommonStock", "multiplier": -1},
+          [
+            "ProceedsFromIssuanceOfSharesUnderIncentiveAndShareBasedCompensationPlansIncludingStockOptions",
+            "ProceedsFromIssuanceOfCommonStock",
+            "ProceedsFromStockOptionsExercised",
+            "ProceedsFromStockPlans",
+            "ProceedsFromIssuanceOfPreferredStockAndPreferenceStock"
+          ]
+        ]
+      }
+    ],
+    "debt_issuance_cf": [
+      "ProceedsFromIssuanceOfUnsecuredDebt",
+      {
+        "sum": [
+          [
+            "ProceedsFromIssuanceOfDebt",
+            "ProceedsFromIssuanceOfLongTermDebt",
+            "ProceedsFromDebtMaturingInMoreThanThreeMonths",
+            "ProceedsFromIssuanceOfLongTermDebtAndCapitalSecuritiesNet",
+            "ProceedsFromDebtNetOfIssuanceCosts",
+            "ProceedsFromIssuanceOfSeniorLongTermDebt"
+          ],
+          [
+            {"tag": "RepaymentsOfDebt", "multiplier": -1},
+            {"tag": "RepaymentsOfLongTermDebt", "multiplier": -1},
+            {
+              "tag": "RepaymentsOfDebtMaturingInMoreThanThreeMonths",
+              "multiplier": -1
+            },
+            {
+              "tag": "RepaymentsOfDebtMaturingInMoreThanThreeMonths",
+              "multiplier": -1
+            },
+            {
+              "tag": "RepaymentsOfDebtAndCapitalLeaseObligations",
+              "multiplier": -1
+            },
+            {"tag": "RepaymentsOfConvertibleDebt", "multiplier": -1},
+            {
+              "tag": "RepaymentsOfLongTermDebtAndCapitalSecurities",
+              "multiplier": -1
+            },
+            {"tag": "RepaymentsOfLongTermLinesOfCredit", "multiplier": -1},
+            {"tag": "RepaymentsOfOtherLongTermDebt", "multiplier": -1}
+          ]
+        ]
+      }
+    ],
+    "financing_cf": [
+      "NetCashProvidedByUsedInFinancingActivitiesContinuingOperations",
+      "NetCashProvidedByUsedInFinancingActivities"
+    ],
+    "change_in_cash": [
+      "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect",
+      "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseExcludingExchangeRateEffect"
+    ]
+  },
+  "balance_sheet": {
+    "shares_out_pit": ["CommonStockSharesOutstanding", "CommonStockSharesIssued"],
+    "shares_out_preferred_pit": [
+      "PreferredStockSharesIssued",
+      "PreferredStockSharesOutstanding",
+      "PreferredStockValue"
+    ],
+    "cash_and_equiv": [
+      "CashAndCashEquivalentsAtCarryingValue",
+      "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents"
+    ],
+    "marketable_securities_current": [
+      "AvailableForSaleSecuritiesDebtSecuritiesCurrent",
+      "MarketableSecuritiesCurrent",
+      "MarketableSecurities",
+      "DebtSecuritiesAvailableForSaleExcludingAccruedInterest"
+    ],
+    "accounts_receivable": [
+      "AccountsNotesAndLoansReceivableNetCurrent",
+      "AccountsAndOtherReceivablesNetCurrent",
+      "ReceivablesNetCurrent",
+      "AccountsReceivableNetCurrent"
+    ],
+    "inventories": [
+      "InventoryNet",
+      {
+        "sum": [
+          "EnergyRelatedInventory",
+          "InventoryPartsAndComponentsNetOfReserves"
+        ]
+      }
+    ],
+    "total_current_assets": ["AssetsCurrent"],
+    "marketable_securities_non_current": ["MarketableSecuritiesNoncurrent"],
+    "pp_and_e": [
+      "PropertyPlantAndEquipmentNet",
+      "PropertyPlantAndEquipmentAndFinanceLeaseRightOfUseAssetAfterAccumulatedDepreciationAndAmortization"
+    ],
+    "total_non_current_assets": [
+      "AssetsNoncurrent",
+      {
+        "sum": ["Assets", {"tag": "AssetsCurrent", "multiplier": -1}],
+        "require_all_terms": true
+      }
+    ],
+    "total_assets": ["Assets"],
+    "accounts_payable": [
+      "AccountsPayableAndOtherAccruedLiabilitiesCurrent",
+      "AccountsPayableAndAccruedLiabilitiesCurrent",
+      "AccountsPayableTradeCurrent",
+      "AccountsPayableCurrent"
+    ],
+    "deferred_revenue_current": [
+      "DeferredRevenueCurrent",
+      "DeferredIncomeCurrent",
+      "ContractWithCustomerLiabilityCurrent",
+      "IncreaseDecreaseInContractWithCustomerLiability"
+    ],
+    "st_debt": [
+      {
+        "sum": [
+          [
+            "LongTermDebtAndCapitalLeaseObligationsCurrent",
+            "LongTermDebtCurrent",
+            "NotesPayableCurrent",
+            "DebtCurrent",
+            "OtherShortTermBorrowings"
+          ],
+          "DebtInstrumentUnamortizedPremiumCurrent"
+        ]
+      }
+    ],
+    "lt_debt": [
+      "LongTermDebtAndCapitalLeaseObligations",
+      "LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities",
+      "LongTermNotesAndLoans",
+      "LongTermDebtNoncurrent",
+      "LongTermDebt"
+    ],
+    "total_current_liabilities": ["LiabilitiesCurrent"],
+    "total_non_current_liabilities": ["LiabilitiesNoncurrent"],
+    "total_liabilities": ["Liabilities"],
+    "retained_earnings": ["RetainedEarningsAccumulatedDeficit"],
+    "minority_or_non_controlling_interest": [{"tag": "MinorityInterest", "default": 0.0}],
+    "total_shareholders_equity": [
+      "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
+      "StockholdersEquity"
+    ],
+    "total_liabilities_and_shareholders_equity": ["LiabilitiesAndStockholdersEquity"]
+  },
+  "other": {"shares_out_pit": ["EntityCommonStockSharesOutstanding"]}
+}

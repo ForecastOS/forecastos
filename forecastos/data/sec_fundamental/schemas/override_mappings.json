@@ -1,0 +1,68 @@
+{
+  "income_statement": {
+    "0001341439": {
+      "net_income": [
+        "IncomeLossFromContinuingOperations",
+        "NetIncomeLoss",
+        "ProfitLoss"
+      ]
+    }
+  },
+  "balance_sheet": {
+    "0000002488": {
+      "st_debt": [
+        {
+          "sum": [
+            [
+              "LongTermDebtAndCapitalLeaseObligationsCurrent",
+              "LongTermDebtCurrent",
+              "NotesPayableCurrent",
+              "DebtCurrent",
+              "OtherShortTermBorrowings",
+              "ShortTermBorrowings"
+            ],
+            "DebtInstrumentUnamortizedPremiumCurrent"
+          ]
+        }
+      ]
+    },
+    "0000310158": {
+      "st_debt": [
+        {
+          "sum": [
+            [
+              "LongTermDebtAndCapitalLeaseObligationsCurrent",
+              "DebtCurrent",
+              "LongTermDebtCurrent",
+              "NotesPayableCurrent",
+              "OtherShortTermBorrowings"
+            ],
+            "DebtInstrumentUnamortizedPremiumCurrent"
+          ]
+        }
+      ]
+    },
+    "0000077476": {
+      "st_debt": [
+        {
+          "sum": [
+            [
+              "ShortTermBorrowings",
+              "LongTermDebtAndCapitalLeaseObligationsCurrent",
+              "LongTermDebtCurrent",
+              "NotesPayableCurrent",
+              "DebtCurrent",
+              "OtherShortTermBorrowings"
+            ],
+            "DebtInstrumentUnamortizedPremiumCurrent"
+          ]
+        }
+      ]
+    }
+  },
+  "cashflow_statement": {
+    "0000354950": {"d_and_a_cf": ["DepreciationDepletionAndAmortization"]},
+    "0000077476": {"d_and_a_cf": ["DepreciationDepletionAndAmortization"]}
+  },
+  "other": {}
+}
