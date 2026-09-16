@@ -635,5 +635,5 @@ class FactorRisk(BaseRisk):
         self.max_daily_var_est = kwargs.get("max_daily_var_est", 0.00063)
         if self._max_std_dev:
             print(
-                "\nMake sure you are using a solver that can handle quadratic constraints (since you set max standard deviation in your risk model, which creates a quadratic constraint), like cvx.CLARABEL.\nNote that cvx.OSQP doesn't support convex constraints as of Aug 2024."
+                "\nMake sure you are using a solver that can handle quadratic constraints (since you set max standard deviation in your risk model, which creates a quadratic constraint), like cvx.CLARABEL.\nNote that cvx.OSQP doesn't support convex quadratic constraints as of Aug 2024."
             )

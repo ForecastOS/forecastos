@@ -25,6 +25,8 @@ class SPO(BaseStrategy):
         "max_iter": 50_000,
     }
 
+    _required_data = ("actual_returns", "forecast_returns")
+
     def __init__(
         self,
         actual_returns: pd.DataFrame,

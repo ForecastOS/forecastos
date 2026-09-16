@@ -4,12 +4,21 @@ import pandas as pd
 
 from forecastos.portfolio.constraint_model import BaseConstraint
 from forecastos.portfolio.cost_model import BaseCost
+from forecastos.utils import HydrateMixin
 
 
-class BaseStrategy:
+class BaseStrategy(HydrateMixin):
     """Base class for an optimization strategy.
 
     Must implement :py:meth:`~forecastos.portfolio.strategy.base_strategy.BaseStrategy.generate_trade_list` as per below.
+
+    Supports dehydrate/rehydrate (see :py:class:`~forecastos.utils.hydrate.HydrateMixin`)
+    so strategies can be persisted between sessions (e.g. loaded daily to generate the
+    next trade list). The `backtest_controller` back-reference is intentionally excluded
+    to avoid a pickling cycle; it is re-established when the owning
+    :py:class:`~forecastos.portfolio.backtest_controller.BacktestController` is rehydrated.
+    Dehydrate the controller (not the strategy on its own) to keep the strategy state,
+    holdings, and trade history in sync.
 
     Attributes
     ----------
@@ -18,6 +27,14 @@ class BaseStrategy:
     constraints : list
         Constraints applied for optimization strategy. Defaults to empty list. See :py:class:`~forecastos.portfolio.constraint_model.base_constraint.BaseConstraint for optimization model base class.
     """
+
+    _excluded_attrs = {"backtest_controller"}
+
+    # Data attributes the strategy needs to generate trades. Checked by
+    # :py:meth:`~forecastos.portfolio.backtest_controller.BacktestController.resume` so
+    # that, if any were excluded from dehydration, resuming fails loudly until they are
+    # re-supplied via ``resume(strategy_data=...)``.
+    _required_data = ("actual_returns",)
 
     def __init__(
         self,
@@ -48,10 +65,18 @@ class BaseStrategy:
         """
         raise NotImplementedError
 
-    def get_actual_positions_for_t(
+    def settle_trades(
         self, dollars_holdings: pd.Series, dollars_trades: pd.Series, t: dt.datetime
     ) -> pd.Series:
-        """Calculates and returns actual positions, after accounting for trades and costs during period t."""
+        """Applies trading/holding costs and the balancing cash entry to `dollars_trades`,
+        returning ``(dollars_holdings_after_trades, dollars_trades)`` — the portfolio held
+        immediately after executing the trades during period `t`.
+
+        This step needs only data available at trade time (prices, volume, spreads); it
+        does **not** apply period returns, so it is safe to call when generating trades for
+        the current (not-yet-realized) period. Use :py:meth:`apply_returns` afterwards, once
+        `t`'s returns are known, to roll forward to the next period's holdings.
+        """
         dollars_holdings_plus_trades = dollars_holdings + dollars_trades
 
         costs = [
@@ -71,9 +96,35 @@ class BaseStrategy:
             dollars_holdings[cash_col] + dollars_trades[cash_col]
         )
 
-        dollars_holdings_at_next_t = (
-            self.actual_returns.loc[t] * dollars_holdings_plus_trades
-            + dollars_holdings_plus_trades
+        return dollars_holdings_plus_trades, dollars_trades
+
+    def apply_returns(
+        self, dollars_holdings_after_trades: pd.Series, t: dt.datetime
+    ) -> pd.Series:
+        """Applies realized period-`t` returns to post-trade holdings, returning holdings at
+        the start of the next period.
+
+        Requires ``actual_returns.loc[t]`` (i.e. period `t` must have elapsed), so this is
+        the step deferred when trading live for the current day.
+        """
+        return (
+            self.actual_returns.loc[t] * dollars_holdings_after_trades
+            + dollars_holdings_after_trades
+        )
+
+    def get_actual_positions_for_t(
+        self, dollars_holdings: pd.Series, dollars_trades: pd.Series, t: dt.datetime
+    ) -> pd.Series:
+        """Calculates and returns actual positions, after accounting for trades and costs during period t.
+
+        Equivalent to :py:meth:`settle_trades` followed by :py:meth:`apply_returns`; used by
+        the backtest loop where period `t`'s returns are already known.
+        """
+        dollars_holdings_after_trades, dollars_trades = self.settle_trades(
+            dollars_holdings, dollars_trades, t
+        )
+        dollars_holdings_at_next_t = self.apply_returns(
+            dollars_holdings_after_trades, t
         )
 
         return dollars_holdings_at_next_t, dollars_trades

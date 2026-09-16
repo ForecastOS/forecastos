@@ -24,6 +24,8 @@ class SPOWeights(BaseStrategy):
         "max_iter": 50_000,
     }
 
+    _required_data = ("actual_returns", "target_weights")
+
     def __init__(
         self,
         actual_returns: pd.DataFrame,
