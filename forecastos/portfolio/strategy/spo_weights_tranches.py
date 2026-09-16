@@ -29,6 +29,8 @@ class SPOWeightsTranches(BaseStrategy):
         "max_iter": 50_000,
     }
 
+    _required_data = ("actual_returns", "target_weights")
+
     def __init__(
         self,
         actual_returns: pd.DataFrame,
@@ -41,6 +43,7 @@ class SPOWeightsTranches(BaseStrategy):
         solver=cvx.OSQP,
         solver_opts=None,
         n_periods_held=5,
+        trade_datetimes: list = None,
         **kwargs,
     ):
         super().__init__(
@@ -62,6 +65,11 @@ class SPOWeightsTranches(BaseStrategy):
         self.metadata_properties = ["solver", "solver_opts"]
 
         self.n_periods_held = n_periods_held
+        # Datetimes on which a new tranche may be opened (None = every period). A tranche
+        # opened at period q is unwound at q + n_periods_held, and the unwind reads the
+        # ledger row saved when that tranche was opened, so every unwind target must itself
+        # be a trade datetime: pass a cadence that divides n_periods_held evenly.
+        self.trade_datetimes = trade_datetimes
         self.u_unwind = {}
 
         self.polishing = kwargs.get("polishing", True)
@@ -151,6 +159,9 @@ class SPOWeightsTranches(BaseStrategy):
 
         if t is None:
             t = dt.datetime.today()
+
+        if self.trade_datetimes is not None and t not in self.trade_datetimes:
+            return self._zerotrade(holdings)
 
         if is_distributed:
             weights_trades = self.weights_trades_distr.loc[t].values

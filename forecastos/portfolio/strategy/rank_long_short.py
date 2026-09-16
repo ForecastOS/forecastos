@@ -24,6 +24,8 @@ class RankLongShort(BaseStrategy):
         Number of periods positions held. After n number of periods, positions unwound.
     """
 
+    _required_data = ("actual_returns", "metric_to_rank")
+
     def __init__(
         self,
         actual_returns: pd.DataFrame,
